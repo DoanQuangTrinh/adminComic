@@ -20,22 +20,6 @@ var dashRoutes = [
     role: [Roles.ADMIN],
   },
   {
-    path: "/subDomain",
-    name: "SubDomain",
-    icon: <StatsIcon color="inherit" />,
-    component: SubDomain,
-    layout: "/admin",
-    role: [Roles.ADMIN],
-  },
-  {
-    path: "/domain",
-    name: "Domain",
-    icon: <StatsIcon color="inherit" />,
-    component: Domain,
-    layout: "/admin",
-    role: [Roles.ADMIN],
-  },
-  {
     path: "/teams",
     name: "Teams",
     rtlName: "لوحة القيادة",
@@ -58,21 +42,6 @@ var dashRoutes = [
         component: Profile,
         layout: "/admin",
         role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
-      },
-
-      {
-        path: "/domain",
-        name: "Domain",
-        component: Domain,
-        layout: "/admin",
-        icon: <PersonIcon color="inherit" />,
-      },
-      {
-        path: "/subdomain",
-        name: "SubDomain",
-        component: SubDomain,
-        layout: "/admin",
-        icon: <PersonIcon color="inherit" />,
       },
       {
         path: "/signin",
