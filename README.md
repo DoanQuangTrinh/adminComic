@@ -1,2 +1,1 @@
-# cp-truyen
-cp truyện
+# cp-dns-config
