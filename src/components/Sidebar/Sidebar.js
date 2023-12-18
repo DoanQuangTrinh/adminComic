@@ -214,7 +214,7 @@ function Sidebar(props) {
     <Box pt={"25px"} mb="12px" color="#FFF" justifyContent="center" alignItems="center">
       {/* {logo} */}
       {/* <Text fontSize={35} textTransform="uppercase" fontWeight="bolder">Short Link</Text> */}
-      <img src={logoImg} width={"200px"} />
+      {/* <img src={logoImg} width={"200px"} /> */}
       <HSeparator my="16px" />
     </Box>
   );
