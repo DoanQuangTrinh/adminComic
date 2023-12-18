@@ -8,9 +8,12 @@ import {
   Tr,
   useColorModeValue,
   useDisclosure,
+  IconButton
 } from "@chakra-ui/react";
 import React from "react";
 import ApproveMemberDialog from "./ApproveMemberDialog";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+
 
 function MemberRow(props) {
   const { username, email, status, date, isLast, refetch } = props;
@@ -27,12 +30,7 @@ function MemberRow(props) {
   return (
     <>
       <Tr>
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-          <Text fontSize="md" color={textColor} fontWeight="bold">
-            {date}
-          </Text>
-        </Td>
-
+        
         <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
           <Text
             fontSize="md"
@@ -61,24 +59,52 @@ function MemberRow(props) {
             {status}
           </Badge>
         </Td>
-
         <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+          <Text fontSize="md" color={textColor} fontWeight="bold">
+            {date}
+          </Text>
+        </Td>
+
+
+        {/* <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
           <Button
             p="0px"
             bg="transparent"
             variant="no-effects"
             onClick={status !== "approved" && handleRowClick}
-          >
-            <Text
+          > */}
+            {/* <Text
               fontSize="md"
               color="gray.400"
               fontWeight="bold"
               cursor="pointer"
             >
               {status !== "approved" ? "Approve" : "-"}
-            </Text>
-          </Button>
-        </Td>
+            </Text> */}
+          {/* </Button> */}
+        {/* </Td> */}
+        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+        <IconButton
+          p={2}
+          bg="transparent"
+          onClick={() => {
+            handleRowClick();
+          }}
+        >
+          <EditIcon />
+        </IconButton>
+      </Td>
+      <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+        <IconButton
+          p={2}
+          bg="transparent"
+          onClick={() => {
+            handleRowClickResetPassword();
+          }}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </Td>
       </Tr>
       <ApproveMemberDialog
         isOpen={isOpen}

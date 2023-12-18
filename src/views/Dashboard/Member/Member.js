@@ -22,9 +22,10 @@ import Loading from "components/Layout/Loading";
 import { checkLogin, logout, getToken } from "../../../utils/authentication";
 import { TablePagination } from "@trendmicro/react-paginations";
 import { initialFilter } from "utils/constant";
+import { API_ROUTES , ROOT_API } from "utils/constant";
 
-const memberApi =
-  process.env.REACT_APP_API_HOST + process.env.REACT_APP_MEMBERS;
+
+const memberApi = ROOT_API + API_ROUTES.MEMBER_API
 
 function Member() {
   const textColor = useColorModeValue("gray.700", "white");
@@ -38,15 +39,12 @@ function Member() {
 
   const [{ data, loading, error }, refetch] = useAxios({
     url: memberApi,
-    headers: {
-      xToken,
-    },
     params: filter,
   });
-
+  console.log(data)
   useEffect(() => {
     if (!isLoggedIn) {
-      return history.push("/auth/signin");
+      // return history.push("/auth/signin");
     }
     if (data == undefined) {
       refetch;
@@ -86,10 +84,7 @@ function Member() {
               <Table variant="simple" color={textColor}>
                 <Thead>
                   <Tr my=".8rem" pl="0px" color="gray.400">
-                    <Th pl="0px" borderColor={borderColor} color="gray.400">
-                      Date
-                    </Th>
-                    <Th pl="0px" borderColor={borderColor} color="gray.400">
+                    <Th pl="24px" borderColor={borderColor} color="gray.400">
                       Username
                     </Th>
                     <Th borderColor={borderColor} color="gray.400">
@@ -97,6 +92,15 @@ function Member() {
                     </Th>
                     <Th borderColor={borderColor} color="gray.400">
                       Status
+                    </Th>
+                    <Th pl="24px" borderColor={borderColor} color="gray.400">
+                      Date
+                    </Th>
+                    <Th borderColor={borderColor} color="gray.400">
+                      Edit
+                    </Th>
+                    <Th pl="24px" borderColor={borderColor} color="gray.400">
+                      Delete
                     </Th>
                     <Th borderColor={borderColor}></Th>
                   </Tr>
@@ -107,7 +111,7 @@ function Member() {
                       <MemberRow
                         date={getDay(row.createdAt)}
                         username={row.username}
-                        email={row.emailGoogle}
+                        email={row.email}
                         status={row.status}
                         refetch={refetch}
                         isLast={index === arr.length - 1 ? true : false}

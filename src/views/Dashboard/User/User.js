@@ -23,6 +23,7 @@ import { API_ROUTES , ROOT_API } from "utils/constant";
 
 
 const userApi = ROOT_API + API_ROUTES.USER_API;
+// const userApi = 'http://localhost:3001/api/v1/user/users'
 import UserRegisterDialog from "components/User/UserRegisterDialog";
 import { TablePagination } from "@trendmicro/react-paginations";
 import { initialFilter } from "utils/constant";
@@ -44,7 +45,6 @@ function User() {
   const [users, setUsers] = useState([]);
 
   const isLoggedIn = checkLogin();
-
   const [{ data, loading, error }, refetch] = useAxios({
     url: userApi,
     headers: {
@@ -52,6 +52,7 @@ function User() {
     },
     params: filter
   });
+  console.log(data)
 
   useEffect(() => {
     if (data == undefined) {
@@ -59,7 +60,8 @@ function User() {
     }
     setUsers(data?.data);
   }, [data, setUsers]);
-
+  
+  console.log(users)
   const handelUpdateUser = userDetail => {
     setUserDetail(userDetail)
     onRegisterOpen()
@@ -80,24 +82,27 @@ function User() {
             <Text fontSize="xl" color={textColor} fontWeight="bold">
               Users
             </Text>
-            <Button
+            {/* <Button
               variant="primary"
               maxH="30px"
               m="10px"
               onClick={onRegisterOpen}
             >
               Add
-            </Button>
+            </Button> */}
           </CardHeader>
           <CardBody>
 
             <Table variant="simple" color={textColor}>
               <Thead>
-                <Tr my=".8rem" pl="0px" color="gray.400">
-                  <Th pl="0px" borderColor={borderColor} color="gray.400">
+                <Tr  my=".8rem" pl="0px" color="gray.400">
+                  <Th  pl="24px" borderColor={borderColor} color="gray.400">
                     Name
                   </Th>
-                  <Th borderColor={borderColor} color="gray.400">
+                  <Th pl="24px" borderColor={borderColor} color="gray.400">
+                    Role
+                  </Th>
+                  {/* <Th borderColor={borderColor} color="gray.400">
                     Phone
                   </Th>
                   <Th borderColor={borderColor} color="gray.400">
@@ -105,7 +110,7 @@ function User() {
                   </Th>
                   <Th borderColor={borderColor} color="gray.400">
                     Status
-                  </Th>
+                  </Th> */}
                   <Th borderColor={borderColor}></Th>
                 </Tr>
               </Thead>
@@ -113,7 +118,6 @@ function User() {
                 {users?.map((row, index, arr) => {
                   return (
                     <UserRow
-
                       name={row.username}
                       id={row._id}
                       email={row.email}

@@ -41,51 +41,22 @@ function UserRow(props) {
 
   return (
     <Tr>
-      <Td
-        minWidth={{ sm: "250px" }}
-        pl="0px"
-        borderColor={borderColor}
-        borderBottom={isLast ? "none" : null}
-      >
-        <UserDetailDialog
-          isOpen={isDetailOpen}
-          onOpen={onDetailOpen}
-          onClose={onDetailClose}
-          // tool={name}
-          data={props}
-        />
-        <UserResetPasswordDialog
-          isOpen={isOpen}
-          onOpen={onOpen}
-          onClose={onClose}
-          fetchData={refetch}
-          id={id}
-        />
-        <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Avatar src={logo} w="50px" borderRadius="12px" me="18px" />
-          <Flex direction="column">
-            <Text
-              fontSize="md"
-              color={titleColor}
-              fontWeight="bold"
-              minWidth="100%"
-            >
-              {name}
-            </Text>
-            <Text fontSize="sm" color="gray.400" fontWeight="normal">
-              {email}
-            </Text>
-          </Flex>
-        </Flex>
-      </Td>
-
+      
       <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
-            {phone}
+            {name}
           </Text>
         </Flex>
       </Td>
+      <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+        <Flex direction="column">
+          <Text fontSize="md" color={textColor} fontWeight="bold">
+            {role}
+          </Text>
+        </Flex>
+      </Td>
+      {/* 
 
       <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
         <Flex direction="column">
@@ -105,13 +76,14 @@ function UserRow(props) {
         >
           {status}
         </Badge>
-      </Td>
+      </Td> */}
       <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
           {date}
         </Text>
       </Td>
-      <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+      
+      {/* <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
         <IconButton
           p={2}
           bg="transparent"
@@ -132,7 +104,7 @@ function UserRow(props) {
         >
           <UnlockIcon />
         </IconButton>
-      </Td>
+      </Td> */}
     </Tr>
   );
 }

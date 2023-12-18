@@ -22,7 +22,8 @@ import { useHistory } from "react-router-dom";
 import { useUserDispatch, loginUser } from "context/UserContext";
 import { ROOT_API, API_ROUTES } from "utils/constant";
 
-const loginUrl = ROOT_API + API_ROUTES.LOGIN_API;
+// const loginUrl = ROOT_API + API_ROUTES.LOGIN_API;
+const loginUrl = 'http://localhost:3001/api/v1/user/login'
 function SignIn() {
   const textColor = useColorModeValue("gray.700", "white");
   const bgForm = useColorModeValue("white", "navy.800");
