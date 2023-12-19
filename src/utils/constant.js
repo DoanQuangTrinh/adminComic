@@ -30,6 +30,9 @@ export const MAX_VIDEO_UPLOAD = 1024 * 1024 * 200;
 export const TINY_API_KEY = "d58i95js5t0cfdehsggyi1tx1ojb0akpuiblhzscw8g2akgl";
 export const ROOT_API = process.env.REACT_APP_API_HOST;
 export const API_ROUTES = {
+  COMIC_IS_PROVED: '/api/v1/comics/change-approved',
+  COMIC_IS_HOT:'/api/v1/comics/set-hot-comic',
+  COMIC_API:'/api/v1/comics-in-BO',
   CATEGORY_API:'/api/v1/categories',
   CATEGORY_UPDATE_API:'/api/v1/categories/update',
   CATEGORY_DELETE_API:'/api/v1/categories/delete',
@@ -41,7 +44,7 @@ export const API_ROUTES = {
   SUBDOMAIN_API: '/api/v1/subdomain',
   DELETE_SUBDOMAIN:'/api/v1/subDomain/delete',
   USER_API:'/api/v1/user/users',
-  LOGIN_API:'/api/v1/user/loginUser',
+  LOGIN_API:'/api/v1/user/login',
   LIVE_MATCHES: "/api/v1/match/live-matches-bo",
   CALENDAR_MATCHES: "/api/v1/match/calendar-matches",
   LEAGUES: "/api/v1/league/leagues-bo",

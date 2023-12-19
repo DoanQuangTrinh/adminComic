@@ -11,6 +11,7 @@ import CategoryDetails from "views/Dashboard/Category/CategoryDetails";
 import { StatsIcon, PersonIcon } from "components/Icons/Icons";
 import { TbCategory } from "react-icons/tb";
 import { FaRegUser,FaUsers } from "react-icons/fa";
+import Comic from "views/Dashboard/Comic/Comic";
 
 import { Roles } from "utils/constant";
 import Team from "views/Dashboard/Team/Team";
@@ -66,6 +67,16 @@ var dashRoutes = [
         icon: <TbCategory color="inherit" />,
         secondaryNavbar: true,
         component: Category,
+        layout: "/admin",
+        hidden: false,
+        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+      },
+      {
+        path: "/comic",
+        name: "comic",
+        icon: <TbCategory color="inherit" />,
+        secondaryNavbar: true,
+        component: Comic,
         layout: "/admin",
         hidden: false,
         role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
