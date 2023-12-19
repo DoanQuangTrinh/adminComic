@@ -83,28 +83,7 @@ function MemberRow(props) {
             </Text> */}
           {/* </Button> */}
         {/* </Td> */}
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-        <IconButton
-          p={2}
-          bg="transparent"
-          onClick={() => {
-            handleRowClick();
-          }}
-        >
-          <EditIcon />
-        </IconButton>
-      </Td>
-      <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-        <IconButton
-          p={2}
-          bg="transparent"
-          onClick={() => {
-            handleRowClickResetPassword();
-          }}
-        >
-          <DeleteIcon />
-        </IconButton>
-      </Td>
+        
       </Tr>
       <ApproveMemberDialog
         isOpen={isOpen}

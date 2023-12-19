@@ -6,7 +6,10 @@ import User from "views/Dashboard/User/User";
 import Domain from "views/Dashboard/Domain/Domain";
 import SubDomain from "views/Dashboard/SubDomain/SubDomain";
 import Member from "views/Dashboard/Member/Member";
+import Category from "views/Dashboard/Category/Category";
+import CategoryDetails from "views/Dashboard/Category/CategoryDetails";
 import { StatsIcon, PersonIcon } from "components/Icons/Icons";
+import { TbCategory } from "react-icons/tb";
 import { FaRegUser,FaUsers } from "react-icons/fa";
 
 import { Roles } from "utils/constant";
@@ -47,7 +50,26 @@ var dashRoutes = [
         layout: "/admin",
         hidden: false,
         role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
-      },   
+      },
+      {
+        path: "/category/:id/details",
+        name: "categorydetails",
+        icon: <StatsIcon color="inherit" />,
+        component: CategoryDetails,
+        layout: "/admin",
+        hidden: true,
+        role: [Roles.ADMIN],
+      },
+      {
+        path: "/category",
+        name: "category",
+        icon: <TbCategory color="inherit" />,
+        secondaryNavbar: true,
+        component: Category,
+        layout: "/admin",
+        hidden: false,
+        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+      },
       {
         path: "/signin",
         name: "Sign In",

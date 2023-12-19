@@ -23,7 +23,6 @@ import { API_ROUTES , ROOT_API } from "utils/constant";
 
 
 const userApi = ROOT_API + API_ROUTES.USER_API;
-// const userApi = 'http://localhost:3001/api/v1/user/users'
 import UserRegisterDialog from "components/User/UserRegisterDialog";
 import { TablePagination } from "@trendmicro/react-paginations";
 import { initialFilter } from "utils/constant";
@@ -33,8 +32,6 @@ function User() {
   const borderColor = useColorModeValue("gray.200", "gray.600");
   const [filter, setFilter] = useState(initialFilter);
   const [userDetail, setUserDetail] = useState();
-
-  const xToken = getToken();
 
   const {
     isOpen: isRegisterOpen,
@@ -47,12 +44,8 @@ function User() {
   const isLoggedIn = checkLogin();
   const [{ data, loading, error }, refetch] = useAxios({
     url: userApi,
-    headers: {
-      xToken,
-    },
     params: filter
   });
-  console.log(data)
 
   useEffect(() => {
     if (data == undefined) {
@@ -61,7 +54,6 @@ function User() {
     setUsers(data?.data);
   }, [data, setUsers]);
   
-  console.log(users)
   const handelUpdateUser = userDetail => {
     setUserDetail(userDetail)
     onRegisterOpen()
@@ -72,8 +64,6 @@ function User() {
     setUserDetail()
     onRegisterClose()
   }
-
-
   return (
     <>
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
@@ -102,6 +92,9 @@ function User() {
                   <Th pl="24px" borderColor={borderColor} color="gray.400">
                     Role
                   </Th>
+                  <Th pl="24px" borderColor={borderColor} color="gray.400">
+                    Date
+                  </Th>
                   {/* <Th borderColor={borderColor} color="gray.400">
                     Phone
                   </Th>
@@ -125,6 +118,7 @@ function User() {
                       role={row.role}
                       isLast={index === arr.length - 1 ? true : false}
                       userDetail={row}
+                      date={row.createAt}
                       refetch={refetch}
                       handelUpdateUser={handelUpdateUser}
                     />

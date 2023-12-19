@@ -23,7 +23,7 @@ function UserRow(props) {
   const bgStatus = useColorModeValue("gray.400", "navy.900");
   const borderColor = useColorModeValue("gray.200", "gray.600");
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  
   function handleRowClickResetPassword() {
     onOpen();
   }
@@ -38,7 +38,8 @@ function UserRow(props) {
     onOpen: onDetailOpen,
     onClose: onDetailClose,
   } = useDisclosure();
-
+  const timestampObj = new Date(date);
+  const formattedDate = timestampObj.toLocaleDateString();
   return (
     <Tr>
       
@@ -79,7 +80,7 @@ function UserRow(props) {
       </Td> */}
       <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {date}
+          {formattedDate}
         </Text>
       </Td>
       

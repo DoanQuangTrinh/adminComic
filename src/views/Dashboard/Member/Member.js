@@ -31,7 +31,6 @@ function Member() {
   const textColor = useColorModeValue("gray.700", "white");
   const borderColor = useColorModeValue("gray.200", "gray.600");
 
-  const xToken = getToken();
 
   const [members, setMembers] = useState([]);
   const [filter, setFilter] = useState(initialFilter);
@@ -41,8 +40,7 @@ function Member() {
     url: memberApi,
     params: filter,
   });
-  console.log(data)
-  useEffect(() => {
+  useEffect(() => { 
     if (!isLoggedIn) {
       // return history.push("/auth/signin");
     }
@@ -95,12 +93,6 @@ function Member() {
                     </Th>
                     <Th pl="24px" borderColor={borderColor} color="gray.400">
                       Date
-                    </Th>
-                    <Th borderColor={borderColor} color="gray.400">
-                      Edit
-                    </Th>
-                    <Th pl="24px" borderColor={borderColor} color="gray.400">
-                      Delete
                     </Th>
                     <Th borderColor={borderColor}></Th>
                   </Tr>

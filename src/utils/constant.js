@@ -30,6 +30,10 @@ export const MAX_VIDEO_UPLOAD = 1024 * 1024 * 200;
 export const TINY_API_KEY = "d58i95js5t0cfdehsggyi1tx1ojb0akpuiblhzscw8g2akgl";
 export const ROOT_API = process.env.REACT_APP_API_HOST;
 export const API_ROUTES = {
+  CATEGORY_API:'/api/v1/categories',
+  CATEGORY_UPDATE_API:'/api/v1/categories/update',
+  CATEGORY_DELETE_API:'/api/v1/categories/delete',
+  CATEGORY_ADD_API:'/api/v1/categories/create',
   MEMBER_API:'/api/v1/member/members',
   DOMAIN_API: '/api/v1/domain',
   DELETE_DOMAIN: '/api/v1/domain/delete',
