@@ -30,6 +30,7 @@ export const MAX_VIDEO_UPLOAD = 1024 * 1024 * 200;
 export const TINY_API_KEY = "d58i95js5t0cfdehsggyi1tx1ojb0akpuiblhzscw8g2akgl";
 export const ROOT_API = process.env.REACT_APP_API_HOST;
 export const API_ROUTES = {
+  COMIC_FILTER:'/api/v1/comics/list-comic',
   COMIC_IS_PROVED: '/api/v1/comics/change-approved',
   COMIC_IS_HOT:'/api/v1/comics/set-hot-comic',
   COMIC_API:'/api/v1/comics-in-BO',

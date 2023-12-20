@@ -25,7 +25,7 @@ import {
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   import UpdateCategory from "components/Category/UpdateCategory";
-  
+  import Comic from "../Comic/Comic";
   
   
   function Category() {
@@ -61,7 +61,6 @@ import {
         return <Loading />;
       }
     }, [error]);
-  
     const getDay = (date) => {
       const dateObj = new Date(date);
       const day = dateObj.getDate();
@@ -131,7 +130,6 @@ import {
                     refetch={refetch}
                 />
                 ))}
-
                 </Table>
                 <Flex justifyContent="flex-end">
                   <TablePagination
@@ -157,6 +155,7 @@ import {
                 onOpen={onRegisterOpen}
                 onClose={handelCloseModal}
                 />}
+                
               </>
             )}
           </CardBody>

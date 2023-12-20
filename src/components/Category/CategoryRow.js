@@ -127,7 +127,7 @@ import {
             <DeleteIcon />
           </IconButton>
         </Td>
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+        {/* <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
           <IconButton
             p={2}
             bg="transparent"
@@ -137,7 +137,7 @@ import {
           >
             <TbListDetails />
           </IconButton>
-        </Td>
+        </Td> */}
         <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
         </Td>
           

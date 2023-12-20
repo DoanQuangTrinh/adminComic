@@ -11,6 +11,8 @@ import CategoryDetails from "views/Dashboard/Category/CategoryDetails";
 import { StatsIcon, PersonIcon } from "components/Icons/Icons";
 import { TbCategory } from "react-icons/tb";
 import { FaRegUser,FaUsers } from "react-icons/fa";
+import { CiBoxList } from "react-icons/ci";
+import { TbReportAnalytics } from "react-icons/tb";
 import Comic from "views/Dashboard/Comic/Comic";
 
 import { Roles } from "utils/constant";
@@ -73,8 +75,18 @@ var dashRoutes = [
       },
       {
         path: "/comic",
-        name: "comic",
-        icon: <TbCategory color="inherit" />,
+        name: "Comic",
+        icon: <CiBoxList color="inherit" />,
+        secondaryNavbar: true,
+        component: Comic,
+        layout: "/admin",
+        hidden: false,
+        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+      },
+      {
+        path: "/report",
+        name: "Report Chapter",
+        icon: <TbReportAnalytics color="inherit" />,
         secondaryNavbar: true,
         component: Comic,
         layout: "/admin",

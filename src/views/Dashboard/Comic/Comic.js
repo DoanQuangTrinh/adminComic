@@ -10,8 +10,16 @@ import {
     Tr,
     useColorModeValue,
     useDisclosure,
+    Stack ,
+    InputGroup ,
+    InputLeftAddon ,
+    Input ,
+    Select,
+    FormLabel 
   } from "@chakra-ui/react";
+  import axios from "axios";
   import useAxios from "axios-hooks";
+  import { axiosGet } from "utils/api";
   import Card from "components/Card/Card.js";
   import CardBody from "components/Card/CardBody.js";
   import CardHeader from "components/Card/CardHeader.js";
@@ -33,8 +41,11 @@ import {
       const year = dateObj.getFullYear();
       return day + "/" + month + "/" + year;
     };
+    const unorm = require('unorm');
     const history = useHistory()
     const comicApi = ROOT_API + API_ROUTES.COMIC_API
+    const comicApiFilter = ROOT_API + API_ROUTES.COMIC_FILTER
+    const categoryApi = ROOT_API + API_ROUTES.CATEGORY_API
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,26 +54,91 @@ import {
     const onRegisterClose = onClose;
     const [comic, setComic] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
+    const [dataFilter, setDatafilter] = useState()
     const isLoggedIn = checkLogin();
     const handelCloseModal = () => {
         onRegisterClose()
       }
     const [{ data, loading, error }, refetch] = useAxios({
       url: comicApi,
-      params: filter,
+      params: filter 
     });
+    
     useEffect(() => { 
-      if (!isLoggedIn) {
-        return history.push("/auth/signin");
-      }
-      if (data == undefined) {
-        refetch;
-      }
       setComic(data?.data);
-    }, [isLoggedIn, data, setComic]);
-    comic.map((arr,index) => {
-      console.log(arr.categories)
-    })
+      setDatafilter(data)
+    }, [data]);
+    
+  const clearFilter = () => {
+    setComic(data?.data);
+    setSearchKeywords("")
+    setSelectedGenre("")
+    setSelectedStatus("")
+  }
+    // const searchComic = async () => {
+    //   try {
+    //     const response = await axiosGet(comicApi)
+    //   }
+    //   catch(err){
+
+    //   }
+    // }
+  const [searchKeywords, setSearchKeywords] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedStatus, setSelectedStatus] = useState('');
+
+  const handleSearchKeywordsChange = (event) => {
+    setSearchKeywords(event.target.value);
+  };
+  const handleGenreChange = (event) => {
+    setSelectedGenre(event.target.value);
+  };
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+  const convertToSlug = (inputString) => (
+    unorm
+      .nfkd(inputString)
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]/g, '')
+  );
+  const handleButtonClick = async () => {
+    const nameSlug = convertToSlug(selectedGenre)
+    console.log(nameSlug)
+    try {
+      const response = await axios.get(comicApiFilter, {
+        params: {
+          categorySlug:nameSlug,
+          searchKeyword: searchKeywords,
+          ...filter
+        },
+      });
+      setComic(response.data.data)
+      setDatafilter(response.data)
+      console.log(response);
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  };
+  const [cateComic,setCateComic]= useState()
+  const handleButtonClicks = async () => {
+    try {
+      const response = await axios.get(categoryApi);
+      setCateComic(response.data.data)
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  };
+    useEffect(() => {
+    handleButtonClicks()
+  },[refetch])
+  
+  
     return (
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
         <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
@@ -70,15 +146,79 @@ import {
             <Text fontSize="xl" color={textColor} fontWeight="bold">
               Category
             </Text>
-            <Button
-            variant="primary"
+          </CardHeader>
+          <Flex flexWrap="wrap">
+        <Flex marginTop="10px" w="40%">
+          <FormLabel w="16%" maxH="30px" m="10px" htmlFor="IP">
+            Tìm kiếm
+          </FormLabel>
+          <Input
+            placeholder="Tìm theo tên phim"
+            w="79%"
+            value={searchKeywords}
+            onChange={handleSearchKeywordsChange}
+          />
+        </Flex>
+
+        <Flex w="40%">
+          <FormLabel maxH="30px" m="10px" paddingTop="7px" htmlFor="IP" w="18%">
+            Thể loại
+          </FormLabel>
+          <Select
+            placeholder="Chọn thể loại"
             maxH="30px"
             m="10px"
-            onClick={onRegisterOpen}
+            value={selectedGenre}
+            onChange={handleGenreChange}
           >
-            Add
-          </Button>
-          </CardHeader>
+            {cateComic?.map((cate, index) => (
+              <option key={index} value={cate.name}>
+                {cate.name}
+              </option>
+            ))}
+          </Select>
+        </Flex>
+
+        {/* <Flex w="40%">
+          <FormLabel maxH="30px" m="10px" paddingTop="7px" htmlFor="IP" w="18%">
+            Danh mục
+          </FormLabel>
+          <Select
+            placeholder="Chọn danh mục"
+            maxH="30px"
+            m="10px"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          >
+           
+           {cateComic?.map((cate, index) => (
+              <option key={index} value={cate.name}>
+                {cate.name}
+              </option>
+            ))}
+            
+          </Select>
+        </Flex> */}
+
+        <Flex w="40%">
+          <FormLabel maxH="30px" m="10px" paddingTop="7px" htmlFor="IP" w="18%">
+            Trạng thái
+          </FormLabel>
+          <Select
+            placeholder="Chọn trạng thái"
+            maxH="30px"
+            m="10px"
+            value={selectedStatus}
+            onChange={handleStatusChange}
+          >
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </Select>
+        </Flex>
+      <Button marginTop="-45px" marginLeft="607px" w="90px" onClick={handleButtonClick}>Filter</Button>
+      <Button marginTop="-45px" marginLeft="20px" w="100px" onClick={clearFilter}>Clear Filter</Button>
+      </Flex>
+
           <CardBody>
             {loading ? (
               <Loading />
@@ -115,9 +255,10 @@ import {
                     {comic?.map((row, index, arr) => {
                       return (
                         <ComicRow
-                          isApproved={row.isApproved}
                           id={row._id}
-                          categories={row.categories.name}
+                          comic={comic}
+                          categories={row.categories.map(category => category.name).join(', ')} 
+                          isApproved={row.isApproved}
                           totalComment={row.totalComment === "" ? "no totalComment" : row.totalComment}
                           totalLike={row.totalLike}
                           date={getDay(row.createdAt)}
@@ -131,14 +272,13 @@ import {
                       );
                     })}
                   </Tbody>
-
                 </Table>
                 <Flex justifyContent="flex-end">
                   <TablePagination
                     type="full"
-                    page={data?.pagination?.page}
-                    pageLength={data?.pagination?.pageSize}
-                    totalRecords={data?.pagination?.count}
+                    page={dataFilter?.pagination?.page}
+                    pageLength={dataFilter?.pagination?.pageSize}
+                    totalRecords={dataFilter?.pagination?.count}
                     onPageChange={({ page, pageLength }) => {
                       console.log(page)
                       setFilter({

@@ -21,7 +21,7 @@ import {
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   function ComicRow(props) {
-    const { categories,name, slug, id,ishot,isApproved,totalLike, date, isLast, totalComment,refetch } = props;
+    const { categories,name,comic, slug, id,ishot,isApproved,totalLike, date, isLast, totalComment,refetch } = props;
     const history = useHistory()
     const textColor = useColorModeValue("gray.500", "white");
     const titleColor = useColorModeValue("gray.700", "white");
@@ -32,8 +32,8 @@ import {
     const onRegisterOpen = onOpen;
     const onRegisterClose = onClose;
     const toast = useToast()
+
     const comicHot = async () => {
-        
     const apiHot  = ROOT_API + API_ROUTES.COMIC_IS_HOT
     const data = {
         id:id
