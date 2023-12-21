@@ -52,7 +52,7 @@ var dashRoutes = [
         component: Member,
         layout: "/admin",
         hidden: false,
-        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+        role: [Roles.ADMIN],
       },
       {
         path: "/chapter/:slug/chapter",
@@ -89,7 +89,7 @@ var dashRoutes = [
         component: Category,
         layout: "/admin",
         hidden: false,
-        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+        role: [Roles.ADMIN],
       },
       {
         path: "/comic",
@@ -99,7 +99,7 @@ var dashRoutes = [
         component: Comic,
         layout: "/admin",
         hidden: false,
-        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+        role: [Roles.ADMIN],
       },
       {
         path: "/schedule",
@@ -109,7 +109,7 @@ var dashRoutes = [
         component: ScheduleComic,
         layout: "/admin",
         hidden: false,
-        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+        role: [Roles.ADMIN],
       },
       {
         path: "/report",
@@ -119,7 +119,7 @@ var dashRoutes = [
         component: ReportChapter,
         layout: "/admin",
         hidden: false,
-        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+        role: [Roles.ADMIN],
       },
       {
         path: "/signin",
@@ -128,7 +128,7 @@ var dashRoutes = [
         layout: "/auth",
         icon: <PersonIcon color="inherit" />,
         hidden: true,
-        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+        role: [Roles.ADMIN],
       },
     ],
   },

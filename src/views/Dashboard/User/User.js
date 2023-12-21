@@ -48,11 +48,14 @@ function User() {
   });
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      return history.push("/auth/signin");
+    }
     if (data == undefined) {
       refetch;
     }
     setUsers(data?.data);
-  }, [data, setUsers]);
+  }, [isLoggedIn,data, setUsers]);
   
   const handelUpdateUser = userDetail => {
     setUserDetail(userDetail)

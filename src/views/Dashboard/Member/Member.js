@@ -23,7 +23,7 @@ import { checkLogin, logout, getToken } from "../../../utils/authentication";
 import { TablePagination } from "@trendmicro/react-paginations";
 import { initialFilter } from "utils/constant";
 import { API_ROUTES , ROOT_API } from "utils/constant";
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const memberApi = ROOT_API + API_ROUTES.MEMBER_API
 
@@ -31,7 +31,7 @@ function Member() {
   const textColor = useColorModeValue("gray.700", "white");
   const borderColor = useColorModeValue("gray.200", "gray.600");
 
-
+  const history = useHistory()
   const [members, setMembers] = useState([]);
   const [filter, setFilter] = useState(initialFilter);
   const isLoggedIn = checkLogin();
@@ -42,7 +42,7 @@ function Member() {
   });
   useEffect(() => { 
     if (!isLoggedIn) {
-      // return history.push("/auth/signin");
+      return history.push("/auth/signin");
     }
     if (data == undefined) {
       refetch;

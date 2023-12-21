@@ -23,9 +23,11 @@ import {
   import { TablePagination } from "@trendmicro/react-paginations";
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
+  import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
   
   
   function ReportChapter() {
+    const history = useHistory();
     const categoryApi = ROOT_API + API_ROUTES.COMIC_REPORT_CHAPTER
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");

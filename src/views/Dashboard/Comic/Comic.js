@@ -64,9 +64,12 @@ import {
       params: filter 
     });
     useEffect(() => { 
+      if (!isLoggedIn) {
+        return history.push("/auth/signin");
+      }
       setComic(data?.data);
       setDatafilter(data)
-    }, [data]);
+    }, [isLoggedIn,data]);
     
   const clearFilter = () => {
     setComic(data?.data);

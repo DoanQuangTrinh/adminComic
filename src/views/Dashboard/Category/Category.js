@@ -26,9 +26,10 @@ import {
   import { API_ROUTES , ROOT_API } from "utils/constant";
   import UpdateCategory from "components/Category/UpdateCategory";
   import Comic from "../Comic/Comic";
-  
+  import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
   
   function Category() {
+    const history = useHistory()
     const categoryApi = ROOT_API + API_ROUTES.CATEGORY_API
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
