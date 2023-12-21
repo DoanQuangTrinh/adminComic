@@ -20,6 +20,10 @@ import {
   import { axiosPost,axiosGet } from "utils/api";
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
   import { API_ROUTES , ROOT_API } from "utils/constant";
+  import { GrChapterAdd } from "react-icons/gr";
+  import { FaComments } from "react-icons/fa";
+
+
   function ComicRow(props) {
     const { categories,name,comic, slug, id,ishot,isApproved,totalLike, date, isLast, totalComment,refetch } = props;
     const history = useHistory()
@@ -32,7 +36,14 @@ import {
     const onRegisterOpen = onOpen;
     const onRegisterClose = onClose;
     const toast = useToast()
-
+    const handleAllChapter = () => {
+      history.push(`/admin/chapter/${id}/chapter`);
+      onRegisterOpen();
+    };
+    const handleCommentsComic = () => {
+      history.push(`/admin/commentscomic/${id}/commentscomic`);
+      onRegisterOpen();
+    };
     const comicHot = async () => {
     const apiHot  = ROOT_API + API_ROUTES.COMIC_IS_HOT
     const data = {
@@ -128,9 +139,29 @@ import {
               {date}
             </Text>
           </Td>
+          <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+        <IconButton
+          p={2}
+          bg="transparent"
+          onClick={() => {
+            handleCommentsComic();
+          }}
+        >
+          <FaComments />
+        </IconButton>
+      </Td>
         <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-        </Td>
-          
+        <IconButton
+          p={2}
+          bg="transparent"
+          onClick={() => {
+            handleAllChapter();
+          }}
+        >
+          <GrChapterAdd />
+        </IconButton>
+      </Td>
+      
         </Tr>
         {/* {isRegisterOpen && <UpdateCategory
             id = {id}

@@ -53,7 +53,6 @@ function Member() {
   //Handle Error
   useEffect(() => {
     if (error) {
-      const { status } = error.response;
       return <Loading />;
     }
   }, [error]);

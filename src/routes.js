@@ -1,22 +1,22 @@
 // import
 import React, { Component } from "react";
-import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
 import User from "views/Dashboard/User/User";
-import Domain from "views/Dashboard/Domain/Domain";
-import SubDomain from "views/Dashboard/SubDomain/SubDomain";
 import Member from "views/Dashboard/Member/Member";
 import Category from "views/Dashboard/Category/Category";
-import CategoryDetails from "views/Dashboard/Category/CategoryDetails";
+import CommentsComic from "views/Dashboard/Comic/CommentsComic";
+import CommentsChapter from "views/Dashboard/Comic/CommentsChapter";
 import { StatsIcon, PersonIcon } from "components/Icons/Icons";
-import { TbCategory } from "react-icons/tb";
+import { TbCategory ,TbReportAnalytics} from "react-icons/tb";
 import { FaRegUser,FaUsers } from "react-icons/fa";
+import { AiOutlineSchedule } from "react-icons/ai";
 import { CiBoxList } from "react-icons/ci";
-import { TbReportAnalytics } from "react-icons/tb";
 import Comic from "views/Dashboard/Comic/Comic";
-
+import ReportChapter from "views/Dashboard/ReportChapter/ReportChapter";
+import ScheduleComic from "views/Dashboard/ScheduleComic/ScheduleComic";
+import ChapterComic from "views/Dashboard/Comic/ChapterComic";
 import { Roles } from "utils/constant";
-import Team from "views/Dashboard/Team/Team";
+
 
 var dashRoutes = [
   
@@ -55,10 +55,28 @@ var dashRoutes = [
         role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
       },
       {
-        path: "/category/:id/details",
-        name: "categorydetails",
+        path: "/chapter/:slug/chapter",
+        name: "chater",
         icon: <StatsIcon color="inherit" />,
-        component: CategoryDetails,
+        component: ChapterComic,
+        layout: "/admin",
+        hidden: true,
+        role: [Roles.ADMIN],
+      },
+      {
+        path: "/commentscomic/:comicID/commentscomic",
+        name: "Comments Comic",
+        icon: <StatsIcon color="inherit" />,
+        component: CommentsComic,
+        layout: "/admin",
+        hidden: true,
+        role: [Roles.ADMIN],
+      },
+      {
+        path: "/commentschapter/:chapterID/commentschapter",
+        name: "Comments Comic",
+        icon: <StatsIcon color="inherit" />,
+        component: CommentsChapter,
         layout: "/admin",
         hidden: true,
         role: [Roles.ADMIN],
@@ -84,11 +102,21 @@ var dashRoutes = [
         role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
       },
       {
+        path: "/schedule",
+        name: "Schedule Comic",
+        icon: <AiOutlineSchedule color="inherit" />,
+        secondaryNavbar: true,
+        component: ScheduleComic,
+        layout: "/admin",
+        hidden: false,
+        role: [Roles.ADMIN, Roles.USER, Roles.GUEST],
+      },
+      {
         path: "/report",
         name: "Report Chapter",
         icon: <TbReportAnalytics color="inherit" />,
         secondaryNavbar: true,
-        component: Comic,
+        component: ReportChapter,
         layout: "/admin",
         hidden: false,
         role: [Roles.ADMIN, Roles.USER, Roles.GUEST],

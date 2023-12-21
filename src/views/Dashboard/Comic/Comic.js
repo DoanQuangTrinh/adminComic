@@ -32,6 +32,7 @@ import {
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
   
   function Comic() {
     const getDay = (date) => {
@@ -63,7 +64,6 @@ import {
       url: comicApi,
       params: filter 
     });
-    
     useEffect(() => { 
       setComic(data?.data);
       setDatafilter(data)
@@ -109,7 +109,6 @@ import {
   );
   const handleButtonClick = async () => {
     const nameSlug = convertToSlug(selectedGenre)
-    console.log(nameSlug)
     try {
       const response = await axios.get(comicApiFilter, {
         params: {
@@ -120,22 +119,22 @@ import {
       });
       setComic(response.data.data)
       setDatafilter(response.data)
-      console.log(response);
     } catch (err) {
       console.error('Error:', err);
     }
   };
-  const [cateComic,setCateComic]= useState()
-  const handleButtonClicks = async () => {
+  const [categoryFilter,setCategoryFilter]= useState()
+  const dataCategoryFilter = async () => {
     try {
       const response = await axios.get(categoryApi);
-      setCateComic(response.data.data)
+      setCategoryFilter(response.data.data)
     } catch (err) {
       console.error('Error:', err);
     }
   };
     useEffect(() => {
-    handleButtonClicks()
+    dataCategoryFilter()
+    handleButtonClick()
   },[refetch])
   
   
@@ -144,10 +143,10 @@ import {
         <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
           <CardHeader p="6px 0px 22px 0px">
             <Text fontSize="xl" color={textColor} fontWeight="bold">
-              Category
+              Comic
             </Text>
           </CardHeader>
-          <Flex flexWrap="wrap">
+          <Flex flexWrap="wrap" marginBottom="30px">
         <Flex marginTop="10px" w="40%">
           <FormLabel w="16%" maxH="30px" m="10px" htmlFor="IP">
             Tìm kiếm
@@ -171,7 +170,7 @@ import {
             value={selectedGenre}
             onChange={handleGenreChange}
           >
-            {cateComic?.map((cate, index) => (
+            {categoryFilter?.map((cate, index) => (
               <option key={index} value={cate.name}>
                 {cate.name}
               </option>
@@ -191,7 +190,7 @@ import {
             onChange={handleCategoryChange}
           >
            
-           {cateComic?.map((cate, index) => (
+           {categoryFilter?.map((cate, index) => (
               <option key={index} value={cate.name}>
                 {cate.name}
               </option>
@@ -248,6 +247,12 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
                       </Th>
+                      <Th pl="24px" borderColor={borderColor} color="gray.400">
+                        Comments Comic
+                      </Th>
+                      <Th pl="24px" borderColor={borderColor} color="gray.400">
+                        View Chapter
+                      </Th>
                       <Th borderColor={borderColor}></Th>
                     </Tr>
                   </Thead>
@@ -264,6 +269,7 @@ import {
                           date={getDay(row.createdAt)}
                           updatedAt={getDay(row.updatedAt)}
                           name={row.name}
+                          slug={row.slug}
                           ishot={row.isHot}
                           status={row.status}
                           refetch={refetch}
