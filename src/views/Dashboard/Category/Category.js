@@ -105,6 +105,12 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
                       </Th>
+                      <Th pl="24px" borderColor={borderColor} color="gray.400">
+                        Edit
+                      </Th>
+                      <Th pl="24px" borderColor={borderColor} color="gray.400">
+                        Delete
+                      </Th>
                       <Th borderColor={borderColor}></Th>
                     </Tr>
                   </Thead>

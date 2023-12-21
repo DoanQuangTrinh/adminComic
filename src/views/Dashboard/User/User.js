@@ -104,7 +104,6 @@ function User() {
                   <Th borderColor={borderColor} color="gray.400">
                     Status
                   </Th> */}
-                  <Th borderColor={borderColor}></Th>
                 </Tr>
               </Thead>
               <Tbody>

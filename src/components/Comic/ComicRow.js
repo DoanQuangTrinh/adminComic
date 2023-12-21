@@ -102,19 +102,19 @@ import {
       <>
         <Tr>
           
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md" color={textColor} fontWeight="bold">
+        <Td borderColor={borderColor}  borderBottom={isLast ? "none" : null}>
+            <Text fontSize="md" w="300px" color={textColor} fontWeight="bold">
               {name}
             </Text>
           </Td>
   
           <Td borderColor={borderColor} textAlign="center" borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md"  w="220px" textAlign="center" color={textColor} fontWeight="bold">
+            <Text fontSize="md"  w="100px" textAlign="center" color={textColor} fontWeight="bold">
               {totalComment}
             </Text>
           </Td>
           <Td borderColor={borderColor} textAlign="center" borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md"  w="220px" textAlign="center" color={textColor} fontWeight="bold">
+            <Text fontSize="md"  w="100px" textAlign="center" color={textColor} fontWeight="bold">
               {totalLike}
             </Text>
           </Td>

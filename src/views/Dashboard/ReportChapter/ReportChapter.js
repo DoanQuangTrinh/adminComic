@@ -109,7 +109,6 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
                       </Th>
-                      <Th borderColor={borderColor}></Th>
                     </Tr>
                   </Thead>
                   <Tbody>

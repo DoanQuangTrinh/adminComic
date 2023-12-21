@@ -19,7 +19,6 @@ import {
   } from "@chakra-ui/react";
   import axios from "axios";
   import useAxios from "axios-hooks";
-  import { axiosGet } from "utils/api";
   import Card from "components/Card/Card.js";
   import CardBody from "components/Card/CardBody.js";
   import CardHeader from "components/Card/CardHeader.js";
@@ -75,14 +74,6 @@ import {
     setSelectedGenre("")
     setSelectedStatus("")
   }
-    // const searchComic = async () => {
-    //   try {
-    //     const response = await axiosGet(comicApi)
-    //   }
-    //   catch(err){
-
-    //   }
-    // }
   const [searchKeywords, setSearchKeywords] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -177,28 +168,6 @@ import {
             ))}
           </Select>
         </Flex>
-
-        {/* <Flex w="40%">
-          <FormLabel maxH="30px" m="10px" paddingTop="7px" htmlFor="IP" w="18%">
-            Danh mục
-          </FormLabel>
-          <Select
-            placeholder="Chọn danh mục"
-            maxH="30px"
-            m="10px"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          >
-           
-           {categoryFilter?.map((cate, index) => (
-              <option key={index} value={cate.name}>
-                {cate.name}
-              </option>
-            ))}
-            
-          </Select>
-        </Flex> */}
-
         <Flex w="40%">
           <FormLabel maxH="30px" m="10px" paddingTop="7px" htmlFor="IP" w="18%">
             Trạng thái
@@ -229,13 +198,13 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Name
                       </Th>
-                      <Th borderColor={borderColor} paddingLeft="84px" color="gray.400">
+                      <Th borderColor={borderColor} pl="24px" pr="0"  color="gray.400">
                         Total Comment
                       </Th>
-                      <Th borderColor={borderColor} paddingLeft="90px" color="gray.400">
+                      <Th borderColor={borderColor} pl="40px" pr="0" color="gray.400">
                         Total Like
                       </Th>
-                      <Th pl="24px" textAlign="center" borderColor={borderColor} color="gray.400">
+                      <Th pl="0" textAlign="center" borderColor={borderColor} color="gray.400">
                         categories
                       </Th>
                       <Th pl="24px" textAlign="center" borderColor={borderColor} color="gray.400">
@@ -253,7 +222,6 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         View Chapter
                       </Th>
-                      <Th borderColor={borderColor}></Th>
                     </Tr>
                   </Thead>
                   <Tbody>

@@ -87,9 +87,6 @@ import {
             <TbListDetails />
           </IconButton>
         </Td> */}
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-        </Td>
-          
         </Tr>
       </>
     );
