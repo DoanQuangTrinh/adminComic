@@ -1,6 +1,4 @@
-// Chakra imports
 import {
-    Button,
     Flex,
     Table,
     Tbody,
@@ -23,6 +21,7 @@ import {
   import { TablePagination } from "@trendmicro/react-paginations";
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
+  import moment from "moment";
   import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
   function CommentsComic() {
@@ -56,14 +55,6 @@ import {
         return <Loading />;
       }
     }, [error]);
-  
-    const getDay = (date) => {
-      const dateObj = new Date(date);
-      const day = dateObj.getDate();
-      const month = dateObj.getMonth() + 1;
-      const year = dateObj.getFullYear();
-      return day + "/" + month + "/" + year;
-    };
   
     return (
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
@@ -110,8 +101,8 @@ import {
                       return (
                         <CommentsComicRow
                           id={row?._id}
-                          date={getDay(row?.createdAt)}
-                          updatedAt={getDay(row?.updatedAt)}
+                          date={moment(row.createdAt).format('DD-MM-YYYY')}
+                          updatedAt={moment(row.updatedAt).format('DD-MM-YYYY')}
                           name={row?.member?.username}
                           email={row?.member?.email}
                           totalLike={row?.totalLike}

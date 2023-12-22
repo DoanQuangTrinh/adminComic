@@ -14,29 +14,16 @@ import {
   Switch 
 } from "@chakra-ui/react";
 import React from "react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { TbListDetails } from "react-icons/tb";
-import { axiosPost } from "utils/api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaComments } from "react-icons/fa";
-
-
 function ChapterComicRow(props) {
-  const { name,status, slug, id, date, isLast, totalComment,totalLike,refetch } = props;
+  const { name,status, id, date, isLast, totalComment,totalLike } = props;
   const history = useHistory()
   const textColor = useColorModeValue("gray.500", "white");
-  const titleColor = useColorModeValue("gray.700", "white");
-  const bgStatus = useColorModeValue("gray.400", "navy.900");
   const borderColor = useColorModeValue("gray.200", "gray.600");
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const isRegisterOpen = isOpen;
-  const onRegisterOpen = onOpen;
-  const onRegisterClose = onClose;
-  const toast = useToast()
   
   const handleCommentsComic = () => {
     history.push(`/admin/commentschapter/${id}/commentschapter`);
-    onRegisterOpen();
   };
   return (
     <>

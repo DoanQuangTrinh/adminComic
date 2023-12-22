@@ -1,6 +1,4 @@
-// Chakra imports
 import {
-  Button,
   Flex,
   Table,
   Tbody,
@@ -11,14 +9,13 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-// Custom components
 import useAxios from "axios-hooks";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import UserRow from "components/User/UserRow";
 import React, { useState, useEffect } from "react";
-import { checkLogin, logout, getToken } from "../../../utils/authentication";
+import { checkLogin } from "../../../utils/authentication";
 import { API_ROUTES , ROOT_API } from "utils/constant";
 
 
@@ -75,14 +72,6 @@ function User() {
             <Text fontSize="xl" color={textColor} fontWeight="bold">
               Users
             </Text>
-            {/* <Button
-              variant="primary"
-              maxH="30px"
-              m="10px"
-              onClick={onRegisterOpen}
-            >
-              Add
-            </Button> */}
           </CardHeader>
           <CardBody>
 
@@ -98,15 +87,6 @@ function User() {
                   <Th pl="24px" borderColor={borderColor} color="gray.400">
                     Date
                   </Th>
-                  {/* <Th borderColor={borderColor} color="gray.400">
-                    Phone
-                  </Th>
-                  <Th borderColor={borderColor} color="gray.400">
-                    Level
-                  </Th>
-                  <Th borderColor={borderColor} color="gray.400">
-                    Status
-                  </Th> */}
                 </Tr>
               </Thead>
               <Tbody>
@@ -155,7 +135,6 @@ function User() {
         onOpen={onRegisterOpen}
         onClose={handelCloseModal}
         fetchData={refetch}
-      // data={rowDomain}
       />}
     </>
   );

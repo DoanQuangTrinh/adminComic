@@ -1,4 +1,3 @@
-// Chakra imports
 import {
     Button,
     Flex,
@@ -15,7 +14,6 @@ import {
   import Card from "components/Card/Card.js";
   import CardBody from "components/Card/CardBody.js";
   import CardHeader from "components/Card/CardHeader.js";
-  import MemberRow from "components/Member/MemberRow";
   import CategoryRow from "components/Category/CategoryRow";
   import React, { useState, useEffect } from "react";
   import AddCategory from "components/Category/AddCategory";
@@ -25,9 +23,9 @@ import {
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   import UpdateCategory from "components/Category/UpdateCategory";
-  import Comic from "../Comic/Comic";
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-  
+  import moment from "moment";
+  import Comic from "../Comic/Comic";
   function Category() {
     const history = useHistory()
     const categoryApi = ROOT_API + API_ROUTES.CATEGORY_API
@@ -40,13 +38,15 @@ import {
     const [category, setCategory] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
     const isLoggedIn = checkLogin();
+    
     const handelCloseModal = () => {
         onRegisterClose()
-      }
+    }
     const [{ data, loading, error }, refetch] = useAxios({
       url: categoryApi,
       params: filter,
     });
+    
     useEffect(() => { 
       if (!isLoggedIn) {
         return history.push("/auth/signin");
@@ -62,14 +62,6 @@ import {
         return <Loading />;
       }
     }, [error]);
-    const getDay = (date) => {
-      const dateObj = new Date(date);
-      const day = dateObj.getDate();
-      const month = dateObj.getMonth() + 1;
-      const year = dateObj.getFullYear();
-      return day + "/" + month + "/" + year;
-    };
-  
     return (
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
         <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
@@ -120,8 +112,8 @@ import {
                       return (
                         <CategoryRow
                           id={row._id}
-                          date={getDay(row.createdAt)}
-                          updatedAt={getDay(row.updatedAt)}
+                          date={moment(row.createdAt).format('DD-MM-YYYY')}
+                          updatedAt={moment(row.updatedAt).format('DD-MM-YYYY')}
                           name={row.name}
                           slug={row.slug}
                           status={row.status}
@@ -162,7 +154,9 @@ import {
                 onOpen={onRegisterOpen}
                 onClose={handelCloseModal}
                 />}
-                
+                {isRegisterOpen && <Comic
+                  onDataChanged={onDataChanged} 
+                />}
               </>
             )}
           </CardBody>

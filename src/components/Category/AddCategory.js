@@ -21,7 +21,6 @@ import { axiosPost } from "../../utils/api";
 import { getToken } from "utils/authentication";
 import { API_ROUTES, ROOT_API } from "utils/constant";
 
-const source = axios.CancelToken.source();
 const CreateCategory = ROOT_API + API_ROUTES.CATEGORY_ADD_API;
 const AddCategory = ({ isOpen, onOpen, onClose, refetch }) => {
   const cancelRef = React.useRef();
@@ -30,14 +29,12 @@ const AddCategory = ({ isOpen, onOpen, onClose, refetch }) => {
   const toast = useToast();
   const [success, setSuccess] = useState(null);
   const [isMounted, setIsMounted] = useState(true);
-  const xToken = getToken();
 
   useEffect(() => {
     return () => {
       setIsMounted(false);
     };
   }, []);
-  const [subDomains, setSubDomains] = useState([]);
   useEffect(() => {}, []);
   const [value, setValue] = useState();
   const clickCreateCategory = async () => {

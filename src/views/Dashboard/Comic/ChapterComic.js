@@ -1,4 +1,3 @@
-// Chakra imports
 import {
     Button,
     Flex,
@@ -24,6 +23,7 @@ import {
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+  import moment from "moment";
   
   function ChapterComic() {
     const chapterComicApi = ROOT_API + API_ROUTES.CHAPTER_COMIC
@@ -56,15 +56,6 @@ import {
         return <Loading />;
       }
     }, [error]);
-  
-    const getDay = (date) => {
-      const dateObj = new Date(date);
-      const day = dateObj.getDate();
-      const month = dateObj.getMonth() + 1;
-      const year = dateObj.getFullYear();
-      return day + "/" + month + "/" + year;
-    };
-  
     return (
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
         <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
@@ -110,8 +101,8 @@ import {
                       return (
                         <ChapterComicRow
                           id={row?._id}
-                          date={getDay(row?.createdAt)}
-                          updatedAt={getDay(row?.updatedAt)}
+                          date={moment(row.createdAt).format('DD-MM-YYYY')}
+                          updatedAt={moment(row.updatedAt).format('DD-MM-YYYY')}
                           name={row?.name}
                           totalLike={row?.totalLike}
                           status={row?.status}

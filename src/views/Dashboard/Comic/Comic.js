@@ -1,4 +1,3 @@
-// Chakra imports
 import {
     Button,
     Flex,
@@ -10,9 +9,6 @@ import {
     Tr,
     useColorModeValue,
     useDisclosure,
-    Stack ,
-    InputGroup ,
-    InputLeftAddon ,
     Input ,
     Select,
     FormLabel 
@@ -26,21 +22,14 @@ import {
   import React, { useState, useEffect } from "react";
   import AddCategory from "components/Category/AddCategory";
   import Loading from "components/Layout/Loading";
-  import { checkLogin, logout, getToken } from "../../../utils/authentication";
+  import { checkLogin } from "../../../utils/authentication";
   import { TablePagination } from "@trendmicro/react-paginations";
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+  import moment from "moment";
   
-  function Comic() {
-    const getDay = (date) => {
-      const dateObj = new Date(date);
-      const day = dateObj.getDate();
-      const month = dateObj.getMonth() + 1;
-      const year = dateObj.getFullYear();
-      return day + "/" + month + "/" + year;
-    };
+  function Comic(props) {
     const unorm = require('unorm');
     const history = useHistory()
     const comicApi = ROOT_API + API_ROUTES.COMIC_API
@@ -126,12 +115,11 @@ import {
       console.error('Error:', err);
     }
   };
-    useEffect(() => {
+  useEffect(() => {
     dataCategoryFilter()
     handleButtonClick()
   },[refetch])
-  
-  
+
     return (
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
         <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
@@ -237,8 +225,8 @@ import {
                           isApproved={row.isApproved}
                           totalComment={row.totalComment === "" ? "no totalComment" : row.totalComment}
                           totalLike={row.totalLike}
-                          date={getDay(row.createdAt)}
-                          updatedAt={getDay(row.updatedAt)}
+                          date={moment(row.createdAt).format('DD-MM-YYYY')}
+                          updatedAt={moment(row.updatedAt).format('DD-MM-YYYY')}
                           name={row.name}
                           slug={row.slug}
                           ishot={row.isHot}
