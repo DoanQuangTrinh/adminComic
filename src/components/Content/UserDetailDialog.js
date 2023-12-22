@@ -39,16 +39,6 @@ const UserDetailDialog = ({ isOpen, onClose }) => {
     { value: "spin" },
   ]);
 
-  useEffect(() => {
-    // console.log("data", data);
-    // setDomain(data?.domain);
-    // setUsername(data?.username);
-    // setPassword(data?.password);
-    // setKeywords(data?.keywords);
-    // setActive(data?.active);
-    // setCrawlType(data?.crawlType === undefined ? 2 : data?.crawlType);
-  }, []);
-
   const clickUpdateButton = async () => {
     await axiosPost(updateDomainApi, {
       id: data?._id,

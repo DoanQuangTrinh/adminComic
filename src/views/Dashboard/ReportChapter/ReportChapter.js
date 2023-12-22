@@ -37,7 +37,6 @@ import {
       url: categoryApi,
       params: filter,
     });
-    console.log(data?.data)
     useEffect(() => { 
       if (!isLoggedIn) {
         return history.push("/auth/signin");
