@@ -87,6 +87,9 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
                       </Th>
+                      <Th pl="24px" borderColor={borderColor} color="gray.400">
+                        Comments Chapter Child
+                      </Th>
                       <Th borderColor={borderColor}></Th>
                     </Tr>
                   </Thead>
