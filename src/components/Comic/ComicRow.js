@@ -122,8 +122,8 @@ import {
                 <Switch id='' isChecked={ishot} onChange={comicHot}/>
             </FormControl>
         </Td>
-          <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md" color={textColor} fontWeight="bold">
+          <Td borderColor={borderColor} pl="0" pr="0" borderBottom={isLast ? "none" : null}>
+            <Text fontSize="md" color={textColor} w="82px" fontWeight="bold">
               {date}
             </Text>
           </Td>

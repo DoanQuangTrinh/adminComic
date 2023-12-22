@@ -16,7 +16,6 @@ import {
   import CardHeader from "components/Card/CardHeader.js";
   import CommentsChapterRow from "components/Comic/CommentsChapterRow";
   import React, { useState, useEffect } from "react";
-  import AddCategory from "components/Category/AddCategory";
   import Loading from "components/Layout/Loading";
   import { checkLogin, logout, getToken } from "../../../utils/authentication";
   import { TablePagination } from "@trendmicro/react-paginations";
