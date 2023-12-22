@@ -42,51 +42,6 @@ import {
               {dates}
             </Text>
           </Td>
-
-          <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md" color={textColor} fontWeight="bold">
-              {id}
-            </Text>
-          </Td>
-          <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md" color={textColor} fontWeight="bold">
-              {date}
-            </Text>
-          </Td>
-  
-  
-          {/* <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-          <IconButton
-            p={2}
-            bg="transparent"
-            onClick={handleRowClick}
-            
-          >
-            <EditIcon />
-          </IconButton>
-        </Td>
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-          <IconButton
-            p={2}
-            bg="transparent"
-            onClick={() => {
-                handleDelete();
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </Td> */}
-        {/* <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-          <IconButton
-            p={2}
-            bg="transparent"
-            onClick={() => {
-                handleCategoryDetails();
-            }}
-          >
-            <TbListDetails />
-          </IconButton>
-        </Td> */}
         </Tr>
       </>
     );

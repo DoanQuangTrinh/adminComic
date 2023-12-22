@@ -87,9 +87,6 @@ import {
                       <Th borderColor={borderColor} color="gray.400">
                         totalLike
                       </Th>
-                      <Th borderColor={borderColor} color="gray.400">
-                        Is Like
-                      </Th>
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
                       </Th>

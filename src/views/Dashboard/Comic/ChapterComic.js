@@ -82,9 +82,6 @@ import {
                         totalLike
                       </Th>
                       <Th borderColor={borderColor} color="gray.400">
-                        Id
-                      </Th>
-                      <Th borderColor={borderColor} color="gray.400">
                         Status
                       </Th>
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
@@ -93,7 +90,6 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Comments Chapter
                       </Th>
-                      <Th borderColor={borderColor}></Th>
                     </Tr>
                   </Thead>
                   <Tbody>

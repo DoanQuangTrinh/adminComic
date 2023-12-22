@@ -15,9 +15,10 @@ import {
   import React, { useState, useEffect } from "react";
   import { axiosPost } from "utils/api";
   import { API_ROUTES , ROOT_API } from "utils/constant";
-  const UpdateCategory = ({id, isOpen, initialData, onUpdate, onClose,refetch }) => {
+  const UpdateCategory = ({id, isOpen, initialData, name1, onClose,refetch }) => {
+    console.log(name1)
     const [editedData, setEditedData] = useState(initialData);
-    const [name , setName] = useState("")
+    const [name , setName] = useState(name1)
     const toast = useToast()
     useEffect(() => {
       setEditedData(initialData);
@@ -64,18 +65,11 @@ import {
           <ModalHeader>Update Category</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-          <FormControl>
-              <FormLabel>ID</FormLabel>
-              <Input
-                name="id"
-                value={id}
-                />
-            </FormControl>
             <FormControl>
               <FormLabel>Name</FormLabel>
               <Input
                 type="text"
-                placeholder="Enter ComicId"
+                placeholder="Enter Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 />

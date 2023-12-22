@@ -41,9 +41,8 @@ import {
     const handelCloseModal = () => {
         onRegisterClose()
       }
-    const date = '15/12/2023'
     const [{ data, loading, error }, refetch] = useAxios({
-      url: `${categoryApi}?date=${date}`,
+      url: `${categoryApi}`,
       params:filter
     });
     useEffect(() => { 
@@ -69,14 +68,6 @@ import {
             <Text fontSize="xl" color={textColor} fontWeight="bold">
               Schedule Comic
             </Text>
-            <Button
-            variant="primary"
-            maxH="30px"
-            m="10px"
-            onClick={onRegisterOpen}
-          >
-            Add
-          </Button>
           </CardHeader>
           <CardBody>
             {loading ? (
@@ -92,12 +83,7 @@ import {
                       <Th borderColor={borderColor} color="gray.400">
                         Date
                       </Th>
-                      <Th borderColor={borderColor} color="gray.400">
-                        Id
-                      </Th>
-                      <Th pl="24px" borderColor={borderColor} color="gray.400">
-                        Date Update
-                      </Th>
+
                     </Tr>
                   </Thead>
                   <Tbody>

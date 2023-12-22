@@ -45,7 +45,7 @@ import {
       url: categoryApi,
       params: filter,
     });
-    
+    console.log(data?.data)
     useEffect(() => { 
       if (!isLoggedIn) {
         return history.push("/auth/signin");
@@ -78,7 +78,7 @@ import {
                   <Thead>
                     <Tr my=".8rem" pl="0px" color="gray.400">
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
-                        Name Comics
+                        Comics
                       </Th>
                       <Th borderColor={borderColor} color="gray.400">
                         Type Error
@@ -87,13 +87,16 @@ import {
                         Content
                       </Th>
                       <Th borderColor={borderColor} color="gray.400">
-                        Chương
+                        Chapter
                       </Th>
                       <Th borderColor={borderColor} color="gray.400">
                         Member Report
                       </Th>
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
+                      </Th>
+                      <Th pl="24px" borderColor={borderColor} color="gray.400">
+                        View
                       </Th>
                     </Tr>
                   </Thead>
@@ -102,6 +105,7 @@ import {
                       return (
                         <ReportChapterRow
                           nameComic={data?.data?.map(chapter => chapter?.chapter?.comic?.name)}
+                          nameSlug={data?.data?.map(chapter => chapter?.chapter?.comic?.slug)}
                           id={row._id}
                           memberReport={data?.data?.map(chapter => chapter?.member?.email)}
                           date={moment(row.createdAt).format('DD-MM-YYYY')}
@@ -109,7 +113,7 @@ import {
                           error ={row.typeError}
                           content={row.content}
                           chuong={data?.data?.map(chapter => chapter?.chapter?.name)}
-                          slug={row.slug}
+                          slug={data?.data?.map(chapter => chapter?.chapter?.slug)}
                           status={row.status}
                           refetch={refetch}
                           isLast={index === arr.length - 1 ? true : false}

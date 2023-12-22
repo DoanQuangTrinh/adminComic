@@ -96,6 +96,11 @@ import {
             </Text>
           </Td>
   
+        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+            <Text fontSize="md" color={textColor} fontWeight="bold">
+              {categories}
+            </Text>
+          </Td>
           <Td borderColor={borderColor} textAlign="center" borderBottom={isLast ? "none" : null}>
             <Text fontSize="md"  w="100px" textAlign="center" color={textColor} fontWeight="bold">
               {totalComment}
@@ -107,11 +112,6 @@ import {
             </Text>
           </Td>
         
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md" color={textColor} fontWeight="bold">
-              {categories}
-            </Text>
-          </Td>
         <Td borderColor={borderColor}  borderBottom={isLast ? "none" : null}>
             <FormControl display='flex' justifyContent="center" alignItems='center'>
                 <Switch id='' isChecked={isApproved} onChange={comicDone}  />

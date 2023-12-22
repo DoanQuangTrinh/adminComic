@@ -43,7 +43,7 @@ import {
     const onRegisterClose = onClose;
     const [comic, setComic] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
-    const [dataFilter, setDatafilter] = useState()
+
     const isLoggedIn = checkLogin();
     const handelCloseModal = () => {
         onRegisterClose()
@@ -57,7 +57,7 @@ import {
         return history.push("/auth/signin");
       }
       setComic(data?.data);
-      setDatafilter(data)
+
     }, [isLoggedIn,data]);
     
   const clearFilter = () => {
@@ -83,15 +83,8 @@ import {
   const handleStatusChange = (event) => {
     setSelectedStatus(event.target.value);
   };
-  const convertToSlug = (inputString) => (
-    unorm
-      .nfkd(inputString)
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w-]/g, '')
-  );
   const handleButtonClick = async () => {
-    const nameSlug = convertToSlug(selectedGenre)
+    const nameSlug = selectedGenre
     try {
       const response = await axios.get(comicApiFilter, {
         params: {
@@ -101,7 +94,6 @@ import {
         },
       });
       setComic(response.data.data)
-      setDatafilter(response.data)
     } catch (err) {
       console.error('Error:', err);
     }
@@ -117,7 +109,6 @@ import {
   };
   useEffect(() => {
     dataCategoryFilter()
-    handleButtonClick()
   },[refetch])
 
     return (
@@ -153,7 +144,7 @@ import {
             onChange={handleGenreChange}
           >
             {categoryFilter?.map((cate, index) => (
-              <option key={index} value={cate.name}>
+              <option key={index} value={cate.slug}>
                 {cate.name}
               </option>
             ))}
@@ -170,8 +161,8 @@ import {
             value={selectedStatus}
             onChange={handleStatusChange}
           >
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">Hoàn Thành</option>
+            <option value="false">Đang Cập Nhật</option>
           </Select>
         </Flex>
       <Button marginTop="-45px" marginLeft="607px" w="90px" onClick={handleButtonClick}>Filter</Button>
@@ -189,14 +180,14 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Name
                       </Th>
+                      <Th pl="0" textAlign="center" borderColor={borderColor} color="gray.400">
+                        categories
+                      </Th>
                       <Th borderColor={borderColor} pl="24px" pr="0"  color="gray.400">
                         Total Comment
                       </Th>
                       <Th borderColor={borderColor} pl="40px" pr="0" color="gray.400">
                         Total Like
-                      </Th>
-                      <Th pl="0" textAlign="center" borderColor={borderColor} color="gray.400">
-                        categories
                       </Th>
                       <Th pl="24px" textAlign="center" borderColor={borderColor} color="gray.400">
                         Status
@@ -241,9 +232,9 @@ import {
                 <Flex justifyContent="flex-end">
                   <TablePagination
                     type="full"
-                    page={dataFilter?.pagination?.page}
-                    pageLength={dataFilter?.pagination?.pageSize}
-                    totalRecords={dataFilter?.pagination?.count}
+                    page={data?.pagination?.page}
+                    pageLength={data?.pagination?.pageSize}
+                    totalRecords={data?.pagination?.count}
                     onPageChange={({ page, pageLength }) => {
                       console.log(page)
                       setFilter({

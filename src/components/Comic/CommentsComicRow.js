@@ -43,12 +43,6 @@ import {
               {totalLike}
             </Text>
           </Td>
-  
-          <Td borderColor={borderColor}  borderBottom={isLast ? "none" : null}>
-              <FormControl display='flex'  alignItems='center'>
-                  <Switch id='' isChecked={is_like} />
-              </FormControl>
-          </Td>
           <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
             <Text fontSize="md" color={textColor} fontWeight="bold">
               {date}

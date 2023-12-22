@@ -47,11 +47,6 @@ function ChapterComicRow(props) {
           </Text>
         </Td>
 
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-          <Text fontSize="md" color={textColor} fontWeight="bold">
-            {id}
-          </Text>
-        </Td>
         <Td borderColor={borderColor}  borderBottom={isLast ? "none" : null}>
             <FormControl display='flex'  alignItems='center'>
                 <Switch id='' isChecked={status} />
