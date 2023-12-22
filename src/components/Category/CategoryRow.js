@@ -16,7 +16,6 @@ import {
   import Comic from "views/Dashboard/Comic/Comic";
   function CategoryRow(props) {
     const { name, slug, id, date, isLast, refetch } = props;
-    console.log(name)
     const textColor = useColorModeValue("gray.500", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
     const { isOpen, onOpen, onClose } = useDisclosure();

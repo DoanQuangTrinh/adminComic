@@ -20,7 +20,6 @@ import {
   import CardHeader from "components/Card/CardHeader.js";
   import ComicRow from "components/Comic/ComicRow";
   import React, { useState, useEffect } from "react";
-  import AddCategory from "components/Category/AddCategory";
   import Loading from "components/Layout/Loading";
   import { checkLogin } from "../../../utils/authentication";
   import { TablePagination } from "@trendmicro/react-paginations";
@@ -29,75 +28,48 @@ import {
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
   import moment from "moment";
   
-  function Comic(props) {
-    const unorm = require('unorm');
+  function Comic() {
     const history = useHistory()
     const comicApi = ROOT_API + API_ROUTES.COMIC_API
-    const comicApiFilter = ROOT_API + API_ROUTES.COMIC_FILTER
     const categoryApi = ROOT_API + API_ROUTES.CATEGORY_API
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const isRegisterOpen = isOpen;
-    const onRegisterOpen = onOpen;
-    const onRegisterClose = onClose;
     const [comic, setComic] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
-
+    const [searchKeywords, setSearchKeywords] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState('');
+    const [selectedStatus, setSelectedStatus] = useState('');
+    const handleSearchKeywordsChange = (event) => {
+      setSearchKeywords(event.target.value);
+    };
+    const handleGenreChange = (event) => {
+      setSelectedGenre(event.target.value);
+    };
+    const handleStatusChange = (event) => {
+      setSelectedStatus(event.target.value);
+    };
     const isLoggedIn = checkLogin();
-    const handelCloseModal = () => {
-        onRegisterClose()
-      }
+    const searchKeyword = searchKeywords
+    const categorySlug = selectedGenre
     const [{ data, loading, error }, refetch] = useAxios({
       url: comicApi,
-      params: filter 
+      params: filter
     });
+    const handleFilterClick = () => {
+      setFilter({categorySlug,searchKeyword , ...initialFilter})
+    };
+    const clearFilter = () => {
+      setFilter(initialFilter)
+      setSearchKeywords("")
+      setSelectedGenre("")
+      setSelectedStatus("")
+    }  
     useEffect(() => { 
       if (!isLoggedIn) {
         return history.push("/auth/signin");
       }
       setComic(data?.data);
-
     }, [isLoggedIn,data]);
-    
-  const clearFilter = () => {
-    setComic(data?.data);
-    setSearchKeywords("")
-    setSelectedGenre("")
-    setSelectedStatus("")
-  }
-  const [searchKeywords, setSearchKeywords] = useState('');
-  const [selectedGenre, setSelectedGenre] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('');
-
-  const handleSearchKeywordsChange = (event) => {
-    setSearchKeywords(event.target.value);
-  };
-  const handleGenreChange = (event) => {
-    setSelectedGenre(event.target.value);
-  };
-  const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
-  };
-  const handleStatusChange = (event) => {
-    setSelectedStatus(event.target.value);
-  };
-  const handleButtonClick = async () => {
-    const nameSlug = selectedGenre
-    try {
-      const response = await axios.get(comicApiFilter, {
-        params: {
-          categorySlug:nameSlug,
-          searchKeyword: searchKeywords,
-          ...filter
-        },
-      });
-      setComic(response.data.data)
-    } catch (err) {
-      console.error('Error:', err);
-    }
-  };
   const [categoryFilter,setCategoryFilter]= useState()
   const dataCategoryFilter = async () => {
     try {
@@ -165,7 +137,7 @@ import {
             <option value="false">Đang Cập Nhật</option>
           </Select>
         </Flex>
-      <Button marginTop="-45px" marginLeft="607px" w="90px" onClick={handleButtonClick}>Filter</Button>
+      <Button marginTop="-45px" marginLeft="607px" w="90px" onClick={handleFilterClick}>Filter</Button>
       <Button marginTop="-45px" marginLeft="20px" w="100px" onClick={clearFilter}>Clear Filter</Button>
       </Flex>
 
@@ -247,12 +219,6 @@ import {
                     nextPageRenderer={() => <i className="fa fa-angle-right" />}
                   />
                 </Flex>
-                {isRegisterOpen && <AddCategory
-                refetch={refetch}
-                isOpen={isRegisterOpen}
-                onOpen={onRegisterOpen}
-                onClose={handelCloseModal}
-                />}
               </>
             )}
           </CardBody>

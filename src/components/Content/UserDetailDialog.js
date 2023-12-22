@@ -21,7 +21,7 @@ import { axiosPost } from "../../utils/api";
 const updateDomainApi =
   process.env.REACT_APP_API_HOST + process.env.REACT_APP_UPDATE_DOMAIN;
 
-const UserDetailDialog = ({ isOpen, onOpen, onClose }) => {
+const UserDetailDialog = ({ isOpen, onClose }) => {
   const cancelRef = React.useRef();
 
   // Domain
@@ -50,7 +50,6 @@ const UserDetailDialog = ({ isOpen, onOpen, onClose }) => {
   }, []);
 
   const clickUpdateButton = async () => {
-    console.log("update domain detail");
     await axiosPost(updateDomainApi, {
       id: data?._id,
       active: active,

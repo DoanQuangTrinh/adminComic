@@ -38,7 +38,6 @@ import {
     const [category, setCategory] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
     const isLoggedIn = checkLogin();
-    
     const handelCloseModal = () => {
         onRegisterClose()
     }
@@ -46,7 +45,6 @@ import {
       url: categoryApi,
       params: filter,
     });
-    
     useEffect(() => { 
       if (!isLoggedIn) {
         return history.push("/auth/signin");

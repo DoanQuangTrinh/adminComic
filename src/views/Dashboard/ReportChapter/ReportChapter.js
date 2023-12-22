@@ -17,7 +17,6 @@ import {
   import CardHeader from "components/Card/CardHeader.js";
   import ReportChapterRow from "components/ReportChapter/ReportChapterRow";
   import React, { useState, useEffect } from "react";
-  import AddCategory from "components/Category/AddCategory";
   import Loading from "components/Layout/Loading";
   import { checkLogin } from "../../../utils/authentication";
   import { TablePagination } from "@trendmicro/react-paginations";
@@ -31,16 +30,9 @@ import {
     const categoryApi = ROOT_API + API_ROUTES.COMIC_REPORT_CHAPTER
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const isRegisterOpen = isOpen;
-    const onRegisterOpen = onOpen;
-    const onRegisterClose = onClose;
     const [report, setReport] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
     const isLoggedIn = checkLogin();
-    const handelCloseModal = () => {
-        onRegisterClose()
-      }
     const [{ data, loading, error }, refetch] = useAxios({
       url: categoryApi,
       params: filter,
@@ -140,13 +132,6 @@ import {
                     nextPageRenderer={() => <i className="fa fa-angle-right" />}
                   />
                 </Flex>
-                {isRegisterOpen && <AddCategory
-                refetch={refetch}
-                isOpen={isRegisterOpen}
-                onOpen={onRegisterOpen}
-                onClose={handelCloseModal}
-                />}
-                
               </>
             )}
           </CardBody>

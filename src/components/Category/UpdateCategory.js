@@ -16,7 +16,6 @@ import {
   import { axiosPost } from "utils/api";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   const UpdateCategory = ({id, isOpen, initialData, name1, onClose,refetch }) => {
-    console.log(name1)
     const [editedData, setEditedData] = useState(initialData);
     const [name , setName] = useState(name1)
     const toast = useToast()

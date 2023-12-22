@@ -29,7 +29,7 @@ const ChangeStatusDialog = (props) => {
   const toast = useToast();
   const textColor = useColorModeValue("gray.500", "white");
 
-  const { isOpen, onOpen, onClose, fetchData, name } = props;
+  const { isOpen, onClose, fetchData, name } = props;
 
   const clickChangeStatusButton = async () => {
     const codeData = {

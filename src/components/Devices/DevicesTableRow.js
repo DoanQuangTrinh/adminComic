@@ -32,7 +32,6 @@ function DevicesTableRow(props) {
   function handleDeleteRowClick(){
     console.log("==========> DELETE <============ " + _id);
     let data = axiosPost(deleteLinkApi, {_id: _id});
-    console.log(data);
 
     if (data?.data?.code == 0) {
       toast({

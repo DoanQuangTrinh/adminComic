@@ -17,7 +17,6 @@ import {
   import CardHeader from "components/Card/CardHeader.js";
   import ScheduleComicRow from "components/ScheduleComic/ScheduleComicRow";
   import React, { useState, useEffect } from "react";
-  import AddCategory from "components/Category/AddCategory";
   import Loading from "components/Layout/Loading";
   import { checkLogin, logout, getToken } from "../../../utils/authentication";
   import { TablePagination } from "@trendmicro/react-paginations";
@@ -31,16 +30,9 @@ import {
     const categoryApi = ROOT_API + API_ROUTES.SCHEDULE_COMIC
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const isRegisterOpen = isOpen;
-    const onRegisterOpen = onOpen;
-    const onRegisterClose = onClose;
     const [schedule, setSchedule] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
     const isLoggedIn = checkLogin();
-    const handelCloseModal = () => {
-        onRegisterClose()
-      }
     const [{ data, loading, error }, refetch] = useAxios({
       url: `${categoryApi}`,
       params:filter
@@ -121,12 +113,6 @@ import {
                     nextPageRenderer={() => <i className="fa fa-angle-right" />}
                   />
                 </Flex>
-                {isRegisterOpen && <AddCategory
-                refetch={refetch}
-                isOpen={isRegisterOpen}
-                onOpen={onRegisterOpen}
-                onClose={handelCloseModal}
-                />}
               </>
             )}
           </CardBody>

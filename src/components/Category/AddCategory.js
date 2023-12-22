@@ -22,7 +22,7 @@ import { getToken } from "utils/authentication";
 import { API_ROUTES, ROOT_API } from "utils/constant";
 
 const CreateCategory = ROOT_API + API_ROUTES.CATEGORY_ADD_API;
-const AddCategory = ({ isOpen, onOpen, onClose, refetch }) => {
+const AddCategory = ({ isOpen, onClose, refetch }) => {
   const cancelRef = React.useRef();
   const [name , setname] = useState("")
   const [id, setId] = useState("");

@@ -16,7 +16,6 @@ import {
   import CardHeader from "components/Card/CardHeader.js";
   import ChapterComicRow from "components/Comic/ChapterComicRow";
   import React, { useState, useEffect } from "react";
-  import AddCategory from "components/Category/AddCategory";
   import Loading from "components/Layout/Loading";
   import { checkLogin, logout, getToken } from "../../../utils/authentication";
   import { TablePagination } from "@trendmicro/react-paginations";
@@ -32,15 +31,8 @@ import {
     const idChapter = spliceChapterUrl[1]
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const isRegisterOpen = isOpen;
-    const onRegisterOpen = onOpen;
-    const onRegisterClose = onClose;
     const [filter, setFilter] = useState(initialFilter);
     const isLoggedIn = checkLogin();
-    const handelCloseModal = () => {
-        onRegisterClose()
-      }
     const [{ data, loading, error }, refetch] = useAxios({
         url: `${chapterComicApi}?comicId=${idChapter}`,
         params:{...filter}
@@ -128,12 +120,6 @@ import {
                     nextPageRenderer={() => <i className="fa fa-angle-right" />}
                   />
                 </Flex>
-                {isRegisterOpen && <AddCategory
-                refetch={refetch}
-                isOpen={isRegisterOpen}
-                onOpen={onRegisterOpen}
-                onClose={handelCloseModal}
-                />}
               </>
             )}
           </CardBody>
