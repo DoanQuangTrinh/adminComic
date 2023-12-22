@@ -29,11 +29,12 @@ export const MAX_VIDEO_UPLOAD = 1024 * 1024 * 200;
 
 export const TINY_API_KEY = "d58i95js5t0cfdehsggyi1tx1ojb0akpuiblhzscw8g2akgl";
 export const ROOT_API = process.env.REACT_APP_API_HOST;
+export const API_WEB_TRUYEN = process.env.REACT_APP_WEB_TRUYEN;
 export const API_ROUTES = {
   COMMENTS_CHAPTER:'/api/v1/comment-chapter-bo',
   COMMENTS_COMIC:'/api/v1/comment-comic-bo',
   CHAPTER_COMIC:'/api/v1/chapter',
-  SCHEDULE_COMIC:'/api/v1/schedule-comic',
+  SCHEDULE_COMIC:'/api/v1/schedule-comic-bo',
   COMIC_REPORT_CHAPTER:'/api/v1/report-chapter',
   COMIC_FILTER:'/api/v1/comics/list-comic',
   COMIC_IS_PROVED: '/api/v1/comics/change-approved',

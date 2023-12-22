@@ -1,6 +1,4 @@
-// Chakra imports
 import {
-  Button,
   Flex,
   Table,
   Tbody,
@@ -9,9 +7,7 @@ import {
   Thead,
   Tr,
   useColorModeValue,
-  useDisclosure,
 } from "@chakra-ui/react";
-// Custom components
 import useAxios from "axios-hooks";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -19,8 +15,9 @@ import CardHeader from "components/Card/CardHeader.js";
 import MemberRow from "components/Member/MemberRow";
 import React, { useState, useEffect } from "react";
 import Loading from "components/Layout/Loading";
-import { checkLogin, logout, getToken } from "../../../utils/authentication";
+import { checkLogin } from "../../../utils/authentication";
 import { TablePagination } from "@trendmicro/react-paginations";
+import moment from "moment";
 import { initialFilter } from "utils/constant";
 import { API_ROUTES , ROOT_API } from "utils/constant";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -50,20 +47,11 @@ function Member() {
     setMembers(data?.data);
   }, [isLoggedIn, data, setMembers]);
 
-  //Handle Error
   useEffect(() => {
     if (error) {
       return <Loading />;
     }
   }, [error]);
-
-  const getDay = (date) => {
-    const dateObj = new Date(date);
-    const day = dateObj.getDate();
-    const month = dateObj.getMonth() + 1;
-    const year = dateObj.getFullYear();
-    return day + "/" + month + "/" + year;
-  };
 
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
@@ -99,7 +87,7 @@ function Member() {
                   {members?.map((row, index, arr) => {
                     return (
                       <MemberRow
-                        date={getDay(row.createdAt)}
+                        date={moment(row.createdAt).format('DD-MM-YYYY')}
                         username={row.username}
                         email={row.email}
                         status={row.status}

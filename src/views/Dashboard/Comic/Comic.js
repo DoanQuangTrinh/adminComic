@@ -1,4 +1,3 @@
-// Chakra imports
 import {
     Button,
     Flex,
@@ -10,9 +9,6 @@ import {
     Tr,
     useColorModeValue,
     useDisclosure,
-    Stack ,
-    InputGroup ,
-    InputLeftAddon ,
     Input ,
     Select,
     FormLabel 
@@ -24,99 +20,54 @@ import {
   import CardHeader from "components/Card/CardHeader.js";
   import ComicRow from "components/Comic/ComicRow";
   import React, { useState, useEffect } from "react";
-  import AddCategory from "components/Category/AddCategory";
   import Loading from "components/Layout/Loading";
-  import { checkLogin, logout, getToken } from "../../../utils/authentication";
+  import { checkLogin } from "../../../utils/authentication";
   import { TablePagination } from "@trendmicro/react-paginations";
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+  import moment from "moment";
   
   function Comic() {
-    const getDay = (date) => {
-      const dateObj = new Date(date);
-      const day = dateObj.getDate();
-      const month = dateObj.getMonth() + 1;
-      const year = dateObj.getFullYear();
-      return day + "/" + month + "/" + year;
-    };
-    const unorm = require('unorm');
     const history = useHistory()
     const comicApi = ROOT_API + API_ROUTES.COMIC_API
-    const comicApiFilter = ROOT_API + API_ROUTES.COMIC_FILTER
     const categoryApi = ROOT_API + API_ROUTES.CATEGORY_API
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const isRegisterOpen = isOpen;
-    const onRegisterOpen = onOpen;
-    const onRegisterClose = onClose;
     const [comic, setComic] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
-    const [dataFilter, setDatafilter] = useState()
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const [categorySlug, setCategorySlug] = useState('');
+    const [selectedStatus, setSelectedStatus] = useState('');
+    const handleSearchKeywordChange = (event) => {
+      setSearchKeyword(event.target.value);
+    };
+    const handleCategorySlug = (event) => {
+      setCategorySlug(event.target.value);
+    };
+    const handleStatusChange = (event) => {
+      setSelectedStatus(event.target.value);
+    };
     const isLoggedIn = checkLogin();
-    const handelCloseModal = () => {
-        onRegisterClose()
-      }
     const [{ data, loading, error }, refetch] = useAxios({
       url: comicApi,
-      params: filter 
+      params: filter
     });
+    const handleFilterClick = () => {
+      setFilter({categorySlug,searchKeyword , ...initialFilter})
+    };
+    const clearFilter = () => {
+      setFilter(initialFilter)
+      setSearchKeyword("")
+      setCategorySlug("")
+      setSelectedStatus("")
+    }  
     useEffect(() => { 
       if (!isLoggedIn) {
         return history.push("/auth/signin");
       }
       setComic(data?.data);
-      setDatafilter(data)
     }, [isLoggedIn,data]);
-    
-  const clearFilter = () => {
-    setComic(data?.data);
-    setSearchKeywords("")
-    setSelectedGenre("")
-    setSelectedStatus("")
-  }
-  const [searchKeywords, setSearchKeywords] = useState('');
-  const [selectedGenre, setSelectedGenre] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('');
-
-  const handleSearchKeywordsChange = (event) => {
-    setSearchKeywords(event.target.value);
-  };
-  const handleGenreChange = (event) => {
-    setSelectedGenre(event.target.value);
-  };
-  const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
-  };
-  const handleStatusChange = (event) => {
-    setSelectedStatus(event.target.value);
-  };
-  const convertToSlug = (inputString) => (
-    unorm
-      .nfkd(inputString)
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w-]/g, '')
-  );
-  const handleButtonClick = async () => {
-    const nameSlug = convertToSlug(selectedGenre)
-    try {
-      const response = await axios.get(comicApiFilter, {
-        params: {
-          categorySlug:nameSlug,
-          searchKeyword: searchKeywords,
-          ...filter
-        },
-      });
-      setComic(response.data.data)
-      setDatafilter(response.data)
-    } catch (err) {
-      console.error('Error:', err);
-    }
-  };
   const [categoryFilter,setCategoryFilter]= useState()
   const dataCategoryFilter = async () => {
     try {
@@ -126,12 +77,10 @@ import {
       console.error('Error:', err);
     }
   };
-    useEffect(() => {
+  useEffect(() => {
     dataCategoryFilter()
-    handleButtonClick()
   },[refetch])
-  
-  
+
     return (
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
         <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
@@ -148,8 +97,8 @@ import {
           <Input
             placeholder="Tìm theo tên phim"
             w="79%"
-            value={searchKeywords}
-            onChange={handleSearchKeywordsChange}
+            value={searchKeyword}
+            onChange={handleSearchKeywordChange}
           />
         </Flex>
 
@@ -161,11 +110,11 @@ import {
             placeholder="Chọn thể loại"
             maxH="30px"
             m="10px"
-            value={selectedGenre}
-            onChange={handleGenreChange}
+            value={categorySlug}
+            onChange={handleCategorySlug}
           >
             {categoryFilter?.map((cate, index) => (
-              <option key={index} value={cate.name}>
+              <option key={index} value={cate.slug}>
                 {cate.name}
               </option>
             ))}
@@ -182,11 +131,11 @@ import {
             value={selectedStatus}
             onChange={handleStatusChange}
           >
-            <option value="true">True</option>
-            <option value="false">False</option>
+            <option value="true">Hoàn Thành</option>
+            <option value="false">Đang Cập Nhật</option>
           </Select>
         </Flex>
-      <Button marginTop="-45px" marginLeft="607px" w="90px" onClick={handleButtonClick}>Filter</Button>
+      <Button marginTop="-45px" marginLeft="607px" w="90px" onClick={handleFilterClick}>Filter</Button>
       <Button marginTop="-45px" marginLeft="20px" w="100px" onClick={clearFilter}>Clear Filter</Button>
       </Flex>
 
@@ -201,14 +150,14 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Name
                       </Th>
+                      <Th pl="0" textAlign="center" borderColor={borderColor} color="gray.400">
+                        categories
+                      </Th>
                       <Th borderColor={borderColor} pl="24px" pr="0"  color="gray.400">
                         Total Comment
                       </Th>
                       <Th borderColor={borderColor} pl="40px" pr="0" color="gray.400">
                         Total Like
-                      </Th>
-                      <Th pl="0" textAlign="center" borderColor={borderColor} color="gray.400">
-                        categories
                       </Th>
                       <Th pl="24px" textAlign="center" borderColor={borderColor} color="gray.400">
                         Status
@@ -237,8 +186,8 @@ import {
                           isApproved={row.isApproved}
                           totalComment={row.totalComment === "" ? "no totalComment" : row.totalComment}
                           totalLike={row.totalLike}
-                          date={getDay(row.createdAt)}
-                          updatedAt={getDay(row.updatedAt)}
+                          date={moment(row.createdAt).format('DD-MM-YYYY')}
+                          updatedAt={moment(row.updatedAt).format('DD-MM-YYYY')}
                           name={row.name}
                           slug={row.slug}
                           ishot={row.isHot}
@@ -253,9 +202,9 @@ import {
                 <Flex justifyContent="flex-end">
                   <TablePagination
                     type="full"
-                    page={dataFilter?.pagination?.page}
-                    pageLength={dataFilter?.pagination?.pageSize}
-                    totalRecords={dataFilter?.pagination?.count}
+                    page={data?.pagination?.page}
+                    pageLength={data?.pagination?.pageSize}
+                    totalRecords={data?.pagination?.count}
                     onPageChange={({ page, pageLength }) => {
                       console.log(page)
                       setFilter({
@@ -268,12 +217,6 @@ import {
                     nextPageRenderer={() => <i className="fa fa-angle-right" />}
                   />
                 </Flex>
-                {isRegisterOpen && <AddCategory
-                refetch={refetch}
-                isOpen={isRegisterOpen}
-                onOpen={onRegisterOpen}
-                onClose={handelCloseModal}
-                />}
               </>
             )}
           </CardBody>

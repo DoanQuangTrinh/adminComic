@@ -14,35 +14,23 @@ import {
     FormLabel,
     Switch 
   } from "@chakra-ui/react";
-  import React, { useEffect, useState } from "react";
-  import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-  import { TbListDetails } from "react-icons/tb";
+  import React from "react";
   import { axiosPost,axiosGet } from "utils/api";
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
   import { API_ROUTES , ROOT_API } from "utils/constant";
   import { GrChapterAdd } from "react-icons/gr";
   import { FaComments } from "react-icons/fa";
-
-
   function ComicRow(props) {
-    const { categories,name,comic, slug, id,ishot,isApproved,totalLike, date, isLast, totalComment,refetch } = props;
+    const { categories,name, id,ishot,isApproved,totalLike, date, isLast, totalComment,refetch } = props;
     const history = useHistory()
     const textColor = useColorModeValue("gray.500", "white");
-    const titleColor = useColorModeValue("gray.700", "white");
-    const bgStatus = useColorModeValue("gray.400", "navy.900");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const isRegisterOpen = isOpen;
-    const onRegisterOpen = onOpen;
-    const onRegisterClose = onClose;
     const toast = useToast()
     const handleAllChapter = () => {
       history.push(`/admin/chapter/${id}/chapter`);
-      onRegisterOpen();
     };
     const handleCommentsComic = () => {
       history.push(`/admin/commentscomic/${id}/commentscomic`);
-      onRegisterOpen();
     };
     const comicHot = async () => {
     const apiHot  = ROOT_API + API_ROUTES.COMIC_IS_HOT
@@ -108,6 +96,11 @@ import {
             </Text>
           </Td>
   
+        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+            <Text fontSize="md" color={textColor} fontWeight="bold">
+              {categories}
+            </Text>
+          </Td>
           <Td borderColor={borderColor} textAlign="center" borderBottom={isLast ? "none" : null}>
             <Text fontSize="md"  w="100px" textAlign="center" color={textColor} fontWeight="bold">
               {totalComment}
@@ -119,11 +112,6 @@ import {
             </Text>
           </Td>
         
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md" color={textColor} fontWeight="bold">
-              {categories}
-            </Text>
-          </Td>
         <Td borderColor={borderColor}  borderBottom={isLast ? "none" : null}>
             <FormControl display='flex' justifyContent="center" alignItems='center'>
                 <Switch id='' isChecked={isApproved} onChange={comicDone}  />
@@ -163,13 +151,6 @@ import {
       </Td>
       
         </Tr>
-        {/* {isRegisterOpen && <UpdateCategory
-            id = {id}
-            refetch={refetch}
-            isOpen={isRegisterOpen}
-            onOpen={onRegisterOpen}
-            onClose={handelCloseModal}
-        />} */}
       </>
     );
   }

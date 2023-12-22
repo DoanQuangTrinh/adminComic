@@ -1,6 +1,4 @@
-// Chakra imports
 import {
-    Button,
     Flex,
     Table,
     Tbody,
@@ -9,7 +7,6 @@ import {
     Thead,
     Tr,
     useColorModeValue,
-    useDisclosure,
   } from "@chakra-ui/react";
   import useAxios from "axios-hooks";
   import Card from "components/Card/Card.js";
@@ -17,12 +14,12 @@ import {
   import CardHeader from "components/Card/CardHeader.js";
   import CommentsComicRow from "components/Comic/CommentsComicRow";
   import React, { useState, useEffect } from "react";
-  import AddCategory from "components/Category/AddCategory";
   import Loading from "components/Layout/Loading";
-  import { checkLogin, logout, getToken } from "../../../utils/authentication";
+  import { checkLogin } from "../../../utils/authentication";
   import { TablePagination } from "@trendmicro/react-paginations";
   import { initialFilter } from "utils/constant";
   import { API_ROUTES , ROOT_API } from "utils/constant";
+  import moment from "moment";
   import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
   function CommentsComic() {
@@ -32,15 +29,8 @@ import {
     const idCmtComic = spliceCmtCommic[1]
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const isRegisterOpen = isOpen;
-    const onRegisterOpen = onOpen;
-    const onRegisterClose = onClose;
     const [filter, setFilter] = useState(initialFilter);
     const isLoggedIn = checkLogin();
-    const handelCloseModal = () => {
-        onRegisterClose()
-      }
     const [{ data, loading, error }, refetch] = useAxios({
         url: `${comicCmtApi}/${idCmtComic}`,
         params:{...filter}
@@ -56,14 +46,6 @@ import {
         return <Loading />;
       }
     }, [error]);
-  
-    const getDay = (date) => {
-      const dateObj = new Date(date);
-      const day = dateObj.getDate();
-      const month = dateObj.getMonth() + 1;
-      const year = dateObj.getFullYear();
-      return day + "/" + month + "/" + year;
-    };
   
     return (
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
@@ -96,9 +78,6 @@ import {
                       <Th borderColor={borderColor} color="gray.400">
                         totalLike
                       </Th>
-                      <Th borderColor={borderColor} color="gray.400">
-                        Is Like
-                      </Th>
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
                       </Th>
@@ -110,8 +89,8 @@ import {
                       return (
                         <CommentsComicRow
                           id={row?._id}
-                          date={getDay(row?.createdAt)}
-                          updatedAt={getDay(row?.updatedAt)}
+                          date={moment(row.createdAt).format('DD-MM-YYYY')}
+                          updatedAt={moment(row.updatedAt).format('DD-MM-YYYY')}
                           name={row?.member?.username}
                           email={row?.member?.email}
                           totalLike={row?.totalLike}
@@ -143,12 +122,6 @@ import {
                     nextPageRenderer={() => <i className="fa fa-angle-right" />}
                   />
                 </Flex>
-                {isRegisterOpen && <AddCategory
-                refetch={refetch}
-                isOpen={isRegisterOpen}
-                onOpen={onRegisterOpen}
-                onClose={handelCloseModal}
-                />}
               </>
             )}
           </CardBody>

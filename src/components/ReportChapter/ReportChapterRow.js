@@ -1,36 +1,21 @@
 import {
-    Avatar,
-    Badge,
-    Button,
-    Flex,
     Td,
     Text,
     Tr,
     useColorModeValue,
-    useDisclosure,
     IconButton,
-    useToast
   } from "@chakra-ui/react";
   import React from "react";
-  import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+  import { ExternalLinkIcon } from "@chakra-ui/icons";
+  import { API_WEB_TRUYEN } from "utils/constant";
   function ReportChapterRow(props) {
-    const { name,chuong,memberReport,content, error,nameComic, id, date, isLast, refetch } = props;
-    const history = useHistory()
+    const { nameSlug,slug , name,chuong,memberReport,content, error,nameComic, id, date, isLast, refetch } = props;
     const textColor = useColorModeValue("gray.500", "white");
-    const titleColor = useColorModeValue("gray.700", "white");
-    const bgStatus = useColorModeValue("gray.400", "navy.900");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const isRegisterOpen = isOpen;
-    const onRegisterOpen = onOpen;
-    const onRegisterClose = onClose;
-    const toast = useToast()
-
-    
+    const Link = API_WEB_TRUYEN + `/truyen-tranh/${nameSlug}/${slug}`
     return (
       <>
         <Tr>
-          
         <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
             <Text fontSize="md" color={textColor} fontWeight="bold">
               {nameComic}
@@ -64,43 +49,17 @@ import {
               {date}
             </Text>
           </Td>
-  
-  
-          {/* <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-          <IconButton
-            p={2}
-            bg="transparent"
-            onClick={handleRowClick}
-            
-          >
-            <EditIcon />
-          </IconButton>
-        </Td>
+       
         <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+        <a href={Link} target="_blank" rel="noopener noreferrer">
           <IconButton
             p={2}
             bg="transparent"
-            onClick={() => {
-                handleDelete();
-            }}
           >
-            <DeleteIcon />
+            <ExternalLinkIcon />
           </IconButton>
-        </Td> */}
-        {/* <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-          <IconButton
-            p={2}
-            bg="transparent"
-            onClick={() => {
-                handleCategoryDetails();
-            }}
-          >
-            <TbListDetails />
-          </IconButton>
-        </Td> */}
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
+          </a>
         </Td>
-          
         </Tr>
       </>
     );
