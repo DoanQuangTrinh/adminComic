@@ -36,21 +36,19 @@ import {
     const borderColor = useColorModeValue("gray.200", "gray.600");
     const [comic, setComic] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
-    const [searchKeywords, setSearchKeywords] = useState('');
-    const [selectedGenre, setSelectedGenre] = useState('');
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const [categorySlug, setCategorySlug] = useState('');
     const [selectedStatus, setSelectedStatus] = useState('');
-    const handleSearchKeywordsChange = (event) => {
-      setSearchKeywords(event.target.value);
+    const handleSearchKeywordChange = (event) => {
+      setSearchKeyword(event.target.value);
     };
-    const handleGenreChange = (event) => {
-      setSelectedGenre(event.target.value);
+    const handleCategorySlug = (event) => {
+      setCategorySlug(event.target.value);
     };
     const handleStatusChange = (event) => {
       setSelectedStatus(event.target.value);
     };
     const isLoggedIn = checkLogin();
-    const searchKeyword = searchKeywords
-    const categorySlug = selectedGenre
     const [{ data, loading, error }, refetch] = useAxios({
       url: comicApi,
       params: filter
@@ -60,8 +58,8 @@ import {
     };
     const clearFilter = () => {
       setFilter(initialFilter)
-      setSearchKeywords("")
-      setSelectedGenre("")
+      setSearchKeyword("")
+      setCategorySlug("")
       setSelectedStatus("")
     }  
     useEffect(() => { 
@@ -99,8 +97,8 @@ import {
           <Input
             placeholder="Tìm theo tên phim"
             w="79%"
-            value={searchKeywords}
-            onChange={handleSearchKeywordsChange}
+            value={searchKeyword}
+            onChange={handleSearchKeywordChange}
           />
         </Flex>
 
@@ -112,8 +110,8 @@ import {
             placeholder="Chọn thể loại"
             maxH="30px"
             m="10px"
-            value={selectedGenre}
-            onChange={handleGenreChange}
+            value={categorySlug}
+            onChange={handleCategorySlug}
           >
             {categoryFilter?.map((cate, index) => (
               <option key={index} value={cate.slug}>
