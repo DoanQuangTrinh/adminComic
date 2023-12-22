@@ -7,9 +7,7 @@ import {
   Text,
   Tr,
   useColorModeValue,
-  useDisclosure,
   IconButton,
-  useToast,
   FormControl,
   Switch 
 } from "@chakra-ui/react";

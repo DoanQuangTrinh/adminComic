@@ -12,7 +12,7 @@ import {
   import Card from "components/Card/Card.js";
   import CardBody from "components/Card/CardBody.js";
   import CardHeader from "components/Card/CardHeader.js";
-  import CommentsComicRow from "components/Comic/CommentsComicRow";
+  import CommentsComicChildRow from "components/Comic/CommentsComicChildRow";
   import React, { useState, useEffect } from "react";
   import Loading from "components/Layout/Loading";
   import { checkLogin } from "../../../utils/authentication";
@@ -22,20 +22,20 @@ import {
   import moment from "moment";
   import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-  function CommentsComic() {
-    const comicCmtApi = ROOT_API + API_ROUTES.COMMENTS_COMIC
+  function CommentsComicChild() {
+    const comicCmtApi = ROOT_API + API_ROUTES.COMMENTS_COMIC_CHILD
     const location = useLocation();
-    const spliceCmtCommic = location.pathname.match(/\/commentscomic\/([^/]+)\//);
-    const idCmtComic = spliceCmtCommic[1]
+    const spliceCmtCommicChild = location.pathname.match(/\/comment\/([^/]+)\//);
+    const idCmtComicChild = spliceCmtCommicChild[1]
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
     const [filter, setFilter] = useState(initialFilter);
     const isLoggedIn = checkLogin();
     const [{ data, loading, error }, refetch] = useAxios({
-        url: `${comicCmtApi}/${idCmtComic}`,
+        url: `${comicCmtApi}/${idCmtComicChild}`,
         params:{...filter}
     });
-      const comicCmtData = data?.data
+      const comicChildCmtData = data?.data
     useEffect(() => { 
       if (!isLoggedIn) {
         return history.push("/auth/signin");
@@ -84,13 +84,12 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Comments Child
                       </Th>
-                      <Th borderColor={borderColor}></Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {comicCmtData?.map((row, index, arr) => {
+                    {comicChildCmtData?.map((row, index, arr) => {
                       return (
-                        <CommentsComicRow
+                        <CommentsComicChildRow
                           id={row?._id}
                           date={moment(row.createdAt).format('DD-MM-YYYY')}
                           updatedAt={moment(row.updatedAt).format('DD-MM-YYYY')}
@@ -133,5 +132,5 @@ import {
     );
   }
   
-  export default CommentsComic;
+  export default CommentsComicChild;
   

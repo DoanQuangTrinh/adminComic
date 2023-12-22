@@ -4,19 +4,23 @@ import {
     Tr,
     useColorModeValue,
     FormControl,
-    Switch 
+    IconButton  
   } from "@chakra-ui/react";
   import React from "react";
+  import { FaComments } from "react-icons/fa";
   import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
-  function CommentsChapterRow(props) {
+  function CommentsChapterChildRow(props) {
     const history = useHistory()
-    const { name,is_like, email,content, date, isLast, totalComment,totalLike,refetch } = props;
+    const {id, name, email,content, date, isLast, totalComment,totalLike,refetch } = props;
     const textColor = useColorModeValue("gray.500", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
+    const handleCommentsChild = () => {
+      history.push(`/admin/comment/${id}/comment`);
+    };
     return (
       <>
         <Tr>
+          
         <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
             <Text fontSize="md" color={textColor} fontWeight="bold">
               {name}
@@ -44,21 +48,16 @@ import {
               {totalLike}
             </Text>
           </Td>
-  
-          <Td borderColor={borderColor}  borderBottom={isLast ? "none" : null}>
-              <FormControl display='flex'  alignItems='center'>
-                  <Switch id='' isChecked={is_like} />
-              </FormControl>
-          </Td>
           <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
             <Text fontSize="md" color={textColor} fontWeight="bold">
               {date}
             </Text>
           </Td>
+          
         </Tr>
       </>
     );
   }
   
-  export default CommentsChapterRow;
+  export default CommentsChapterChildRow;
   

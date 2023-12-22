@@ -4,14 +4,19 @@ import {
     Tr,
     useColorModeValue,
     FormControl,
-    Switch 
+    IconButton  
   } from "@chakra-ui/react";
   import React from "react";
-  
+  import { FaComments } from "react-icons/fa";
+  import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
   function CommentsComicRow(props) {
-    const { name,is_like, email,content, date, isLast, totalComment,totalLike,refetch } = props;
+    const history = useHistory()
+    const {id, name, email,content, date, isLast, totalComment,totalLike,refetch } = props;
     const textColor = useColorModeValue("gray.500", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
+    const handleCommentsChild = () => {
+      history.push(`/admin/comment/${id}/comment`);
+    };
     return (
       <>
         <Tr>
@@ -49,8 +54,17 @@ import {
             </Text>
           </Td>
   
-        <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-        </Td>
+          <Td borderColor={borderColor} pl="80px" borderBottom={isLast ? "none" : null}>
+        <IconButton
+          p={2}
+          bg="transparent"
+          onClick={() => {
+            handleCommentsChild();
+          }}
+        >
+          <FaComments />
+        </IconButton>
+      </Td>
           
         </Tr>
       </>

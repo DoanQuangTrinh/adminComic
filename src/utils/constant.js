@@ -31,6 +31,7 @@ export const TINY_API_KEY = "d58i95js5t0cfdehsggyi1tx1ojb0akpuiblhzscw8g2akgl";
 export const ROOT_API = process.env.REACT_APP_API_HOST;
 export const API_WEB_TRUYEN = process.env.REACT_APP_WEB_TRUYEN;
 export const API_ROUTES = {
+  COMMENTS_COMIC_CHILD:'/api/v1/comment',
   COMMENTS_CHAPTER:'/api/v1/comment-chapter-bo',
   COMMENTS_COMIC:'/api/v1/comment-comic-bo',
   CHAPTER_COMIC:'/api/v1/chapter',
