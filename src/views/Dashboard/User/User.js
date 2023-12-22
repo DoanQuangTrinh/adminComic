@@ -33,8 +33,6 @@ function User() {
   const [filter, setFilter] = useState(initialFilter);
   const [userDetail, setUserDetail] = useState();
 
-  const xToken = getToken();
-
   const {
     isOpen: isRegisterOpen,
     onOpen: onRegisterOpen,
@@ -44,22 +42,21 @@ function User() {
   const [users, setUsers] = useState([]);
 
   const isLoggedIn = checkLogin();
-
   const [{ data, loading, error }, refetch] = useAxios({
     url: userApi,
-    headers: {
-      xToken,
-    },
     params: filter
   });
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      return history.push("/auth/signin");
+    }
     if (data == undefined) {
       refetch;
     }
     setUsers(data?.data);
-  }, [data, setUsers]);
-
+  }, [isLoggedIn,data, setUsers]);
+  
   const handelUpdateUser = userDetail => {
     setUserDetail(userDetail)
     onRegisterOpen()
@@ -70,8 +67,6 @@ function User() {
     setUserDetail()
     onRegisterClose()
   }
-
-
   return (
     <>
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
@@ -80,24 +75,30 @@ function User() {
             <Text fontSize="xl" color={textColor} fontWeight="bold">
               Users
             </Text>
-            <Button
+            {/* <Button
               variant="primary"
               maxH="30px"
               m="10px"
               onClick={onRegisterOpen}
             >
               Add
-            </Button>
+            </Button> */}
           </CardHeader>
           <CardBody>
 
             <Table variant="simple" color={textColor}>
               <Thead>
-                <Tr my=".8rem" pl="0px" color="gray.400">
-                  <Th pl="0px" borderColor={borderColor} color="gray.400">
+                <Tr  my=".8rem" pl="0px" color="gray.400">
+                  <Th  pl="24px" borderColor={borderColor} color="gray.400">
                     Name
                   </Th>
-                  <Th borderColor={borderColor} color="gray.400">
+                  <Th pl="24px" borderColor={borderColor} color="gray.400">
+                    Role
+                  </Th>
+                  <Th pl="24px" borderColor={borderColor} color="gray.400">
+                    Date
+                  </Th>
+                  {/* <Th borderColor={borderColor} color="gray.400">
                     Phone
                   </Th>
                   <Th borderColor={borderColor} color="gray.400">
@@ -105,15 +106,13 @@ function User() {
                   </Th>
                   <Th borderColor={borderColor} color="gray.400">
                     Status
-                  </Th>
-                  <Th borderColor={borderColor}></Th>
+                  </Th> */}
                 </Tr>
               </Thead>
               <Tbody>
                 {users?.map((row, index, arr) => {
                   return (
                     <UserRow
-
                       name={row.username}
                       id={row._id}
                       email={row.email}
@@ -121,6 +120,7 @@ function User() {
                       role={row.role}
                       isLast={index === arr.length - 1 ? true : false}
                       userDetail={row}
+                      date={row.createAt}
                       refetch={refetch}
                       handelUpdateUser={handelUpdateUser}
                     />

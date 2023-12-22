@@ -32,6 +32,7 @@ import React from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImg from "assets/img/linkshort-logo.png";
+import LogoImgs from "assets/img/truyen.png"
 
 
 // FUNCTIONS
@@ -211,10 +212,10 @@ function Sidebar(props) {
   let sidebarRadius = "20px";
   let sidebarMargins = "0px";
   var brand = (
-    <Box pt={"25px"} mb="12px" color="#FFF" justifyContent="center" alignItems="center">
+    <Box pt={"25px"} mb="12px" mr="8px" color="#FFF" justifyContent="center" alignItems="center">
       {/* {logo} */}
       {/* <Text fontSize={35} textTransform="uppercase" fontWeight="bolder">Short Link</Text> */}
-      {/* <img src={logoImg} width={"200px"} /> */}
+      <img src={LogoImgs}  />
       <HSeparator my="16px" />
     </Box>
   );
