@@ -16,6 +16,7 @@ import ReportChapter from "views/Dashboard/ReportChapter/ReportChapter";
 import ScheduleComic from "views/Dashboard/ScheduleComic/ScheduleComic";
 import ChapterComic from "views/Dashboard/Comic/ChapterComic";
 import CommentsComicChild from "views/Dashboard/Comic/CommentsComicChild";
+import CommentsChapterChild from "views/Dashboard/Comic/CommentsChapterChild";
 import { Roles } from "utils/constant";
 
 
@@ -78,6 +79,15 @@ var dashRoutes = [
         name: "Comments Child",
         icon: <StatsIcon color="inherit" />,
         component: CommentsComicChild,
+        layout: "/admin",
+        hidden: true,
+        role: [Roles.ADMIN],
+      },
+      {
+        path: "/commentchapter/:parentID/comment",
+        name: "Comments Chapter Child",
+        icon: <StatsIcon color="inherit" />,
+        component: CommentsChapterChild,
         layout: "/admin",
         hidden: true,
         role: [Roles.ADMIN],

@@ -12,7 +12,7 @@ import {
   import Card from "components/Card/Card.js";
   import CardBody from "components/Card/CardBody.js";
   import CardHeader from "components/Card/CardHeader.js";
-  import CommentsComicChildRow from "components/Comic/CommentsComicChildRow";
+  import CommentsChapterChildRow from "components/Comic/CommentsChapterChildRow";
   import React, { useState, useEffect } from "react";
   import Loading from "components/Layout/Loading";
   import { checkLogin } from "../../../utils/authentication";
@@ -22,10 +22,10 @@ import {
   import moment from "moment";
   import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-  function CommentsComicChild() {
+  function CommentsChapterChild() {
     const comicCmtApi = ROOT_API + API_ROUTES.COMMENTS_COMIC_CHILD
     const location = useLocation();
-    const spliceCmtCommicChild = location.pathname.match(/\/comment\/([^/]+)\//);
+    const spliceCmtCommicChild = location.pathname.match(/\/commentchapter\/([^/]+)\//);
     const idCmtComicChild = spliceCmtCommicChild[1]
     const textColor = useColorModeValue("gray.700", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
@@ -52,7 +52,7 @@ import {
         <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
           <CardHeader p="6px 0px 22px 0px">
             <Text fontSize="xl" color={textColor} fontWeight="bold">
-              Comments Comic
+              Comments Chapter Child
             </Text>
           </CardHeader>
           <CardBody>
@@ -81,15 +81,12 @@ import {
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
                       </Th>
-                      <Th pl="24px" borderColor={borderColor} color="gray.400">
-                        Comments Child
-                      </Th>
                     </Tr>
                   </Thead>
                   <Tbody>
                     {comicChildCmtData?.map((row, index, arr) => {
                       return (
-                        <CommentsComicChildRow
+                        <CommentsChapterChildRow
                           id={row?._id}
                           date={moment(row.createdAt).format('DD-MM-YYYY')}
                           updatedAt={moment(row.updatedAt).format('DD-MM-YYYY')}
@@ -132,5 +129,5 @@ import {
     );
   }
   
-  export default CommentsComicChild;
+  export default CommentsChapterChild;
   

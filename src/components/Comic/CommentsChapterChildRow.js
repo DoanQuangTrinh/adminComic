@@ -14,9 +14,6 @@ import {
     const {id, name, email,content, date, isLast, totalComment,totalLike,refetch } = props;
     const textColor = useColorModeValue("gray.500", "white");
     const borderColor = useColorModeValue("gray.200", "gray.600");
-    const handleCommentsChild = () => {
-      history.push(`/admin/comment/${id}/comment`);
-    };
     return (
       <>
         <Tr>
