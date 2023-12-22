@@ -139,7 +139,7 @@ import {
       <Button marginTop="-45px" marginLeft="20px" w="100px" onClick={clearFilter}>Clear Filter</Button>
       </Flex>
 
-          <CardBody>
+          <CardBody w="100%" overflowX="auto">
             {loading ? (
               <Loading />
             ) : (
