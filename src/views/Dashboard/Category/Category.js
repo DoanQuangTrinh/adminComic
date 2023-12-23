@@ -149,9 +149,6 @@ import {
                 onOpen={onRegisterOpen}
                 onClose={handelCloseModal}
                 />}
-                {isRegisterOpen && <Comic
-                  onDataChanged={onDataChanged} 
-                />}
               </>
             )}
           </CardBody>
