@@ -90,9 +90,6 @@ import {
                       <Th borderColor={borderColor} color="gray.400">
                         Slug
                       </Th>
-                      <Th borderColor={borderColor} color="gray.400">
-                        Id
-                      </Th>
                       <Th pl="24px" borderColor={borderColor} color="gray.400">
                         Date
                       </Th>

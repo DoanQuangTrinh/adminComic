@@ -34,11 +34,6 @@ import {
                 {content}
             </Text>
           </Td>
-          <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md" pl="38px" color={textColor} fontWeight="bold">
-              {totalComment}
-            </Text>
-          </Td>
   
           <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
             <Text fontSize="md" pl="30px" color={textColor} fontWeight="bold">

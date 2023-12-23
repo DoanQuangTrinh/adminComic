@@ -80,11 +80,6 @@ import {
           </Td>
           <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
             <Text fontSize="md" color={textColor} fontWeight="bold">
-              {id}
-            </Text>
-          </Td>
-          <Td borderColor={borderColor} borderBottom={isLast ? "none" : null}>
-            <Text fontSize="md" color={textColor} fontWeight="bold">
               {date}
             </Text>
           </Td>
